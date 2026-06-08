@@ -5,171 +5,129 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-CXR5JD8BF9');</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Training Workshop - code2careerai</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<title>Free AI Workshop — June 20 | code2careerai</title>
+//fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-:root{--blue:#3b82f6;--green:#10b981;--dark:#020617;--card:#0f172a;--text:#f8fafc;--muted:#94a3b8;}
+:root{
+  --blue:#3b82f6;
+  --cyan:#06b6d4;
+  --green:#10b981;
+  --dark:#020617;
+  --card:#0f172a;
+  --card2:#0c1628;
+  --text:#f8fafc;
+  --muted:#94a3b8;
+  --border:rgba(255,255,255,0.07);
+  --glow-blue:rgba(59,130,246,0.4);
+  --glow-cyan:rgba(6,182,212,0.4);
+}
 body{background:var(--dark);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden;}
+
+/* ── Background grid + gradient ── */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:
+    linear-gradient(rgba(6,182,212,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(6,182,212,0.03) 1px,transparent 1px);
+  background-size:60px 60px;
+  pointer-events:none;z-index:0;
+}
+body::after{
+  content:'';position:fixed;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(6,182,212,0.08) 0%,transparent 60%),
+              radial-gradient(ellipse 60% 40% at 80% 80%,rgba(59,130,246,0.06) 0%,transparent 50%);
+  pointer-events:none;z-index:0;
+}
+
+/* ── Particles ── */
 .particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
-.particle{position:absolute;border-radius:50%;animation:float linear infinite;opacity:0.15;}
-@keyframes float{0%{transform:translateY(100vh) rotate(0deg);opacity:0;}10%{opacity:0.15;}90%{opacity:0.15;}100%{transform:translateY(-100px) rotate(720deg);opacity:0;}}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.5;}}
-@keyframes countdown{from{stroke-dashoffset:0;}to{stroke-dashoffset:283;}}
-@keyframes slideIn{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
-@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(59,130,246,0.3);}50%{box-shadow:0 0 40px rgba(59,130,246,0.7),0 0 80px rgba(59,130,246,0.3);}}
+.particle{position:absolute;border-radius:50%;animation:float linear infinite;opacity:0.12;}
+
+/* ── Keyframes ── */
+@keyframes float{0%{transform:translateY(100vh) rotate(0deg);opacity:0;}10%{opacity:0.12;}90%{opacity:0.12;}100%{transform:translateY(-100px) rotate(720deg);opacity:0;}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+@keyframes pulseRing{0%{box-shadow:0 0 0 0 rgba(6,182,212,0.5);}70%{box-shadow:0 0 0 10px rgba(6,182,212,0);}100%{box-shadow:0 0 0 0 rgba(6,182,212,0);}}
+@keyframes slideIn{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes slideInRight{from{opacity:0;transform:translateX(24px);}to{opacity:1;transform:translateX(0);}}
+@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(6,182,212,0.2),0 0 40px rgba(59,130,246,0.1);}50%{box-shadow:0 0 40px rgba(6,182,212,0.4),0 0 80px rgba(59,130,246,0.2);}}
 @keyframes shimmer{0%{background-position:-200% center;}100%{background-position:200% center;}}
-.hero{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
-.container{max-width:1100px;width:100%;margin:0 auto;}
-.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);color:var(--green);padding:8px 18px;border-radius:50px;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:24px;animation:slideIn 0.6s ease;}
-.badge-dot{width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 1.5s ease infinite;}
-.headline{font-family:'Space Grotesk',sans-serif;font-size:clamp(48px,8vw,90px);font-weight:900;line-height:0.95;margin-bottom:20px;animation:slideIn 0.7s ease;}
-.headline .line1{display:block;background:linear-gradient(135deg,#fff 0%,#93c5fd 50%,#fff 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite;}
-.headline .line2{display:block;color:var(--blue);text-shadow:0 0 40px rgba(59,130,246,0.5);}
-.subhead{font-size:clamp(16px,2.5vw,20px);color:var(--muted);max-width:580px;line-height:1.7;margin-bottom:40px;animation:slideIn 0.8s ease;}
-.subhead span{color:var(--green);font-weight:600;}
-.main-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:start;animation:slideIn 0.9s ease;}
-.left-col{display:flex;flex-direction:column;gap:28px;}
-.card{background:rgba(15,23,42,0.8);border:1px solid rgba(255,255,255,0.07);border-radius:20px;padding:28px;backdrop-filter:blur(10px);transition:border-color 0.3s;}
-.card:hover{border-color:rgba(59,130,246,0.3);}
-.card-title{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:18px;}
-.feature-item{display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.04);}
-.feature-item:last-child{border-bottom:none;padding-bottom:0;}
-.feature-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
-.feature-icon.blue{background:rgba(59,130,246,0.15);color:var(--blue);}
-.feature-icon.green{background:rgba(16,185,129,0.15);color:var(--green);}
-.feature-icon.purple{background:rgba(139,92,246,0.15);color:#a78bfa;}
-.feature-text strong{display:block;color:var(--text);font-size:15px;font-weight:600;margin-bottom:3px;}
-.feature-text span{color:var(--muted);font-size:13px;}
-.bonus-card{background:linear-gradient(135deg,rgba(16,185,129,0.1),rgba(59,130,246,0.1));border:1px solid rgba(16,185,129,0.25);border-radius:16px;padding:18px 22px;display:flex;align-items:center;gap:14px;}
-.bonus-badge{background:var(--green);color:#000;font-size:11px;font-weight:800;letter-spacing:1px;padding:4px 10px;border-radius:6px;text-transform:uppercase;flex-shrink:0;}
-.bonus-text{color:var(--text);font-size:14px;font-weight:500;}
-.right-col{display:flex;flex-direction:column;gap:20px;}
-.event-card{background:rgba(15,23,42,0.9);border:1px solid rgba(59,130,246,0.2);border-radius:20px;padding:28px;backdrop-filter:blur(10px);animation:glow 3s ease infinite;}
-.event-stat{display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
-.event-stat:last-of-type{border-bottom:none;}
-.event-stat-icon{width:48px;height:48px;background:rgba(59,130,246,0.15);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--blue);font-size:20px;flex-shrink:0;}
-.event-stat-info label{display:block;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
-.event-stat-info strong{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;color:var(--text);}
-.countdown-section{text-align:center;padding:20px 0 8px;border-top:1px solid rgba(255,255,255,0.05);margin-top:12px;}
-.countdown-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;}
-.countdown-boxes{display:flex;justify-content:center;gap:10px;}
-.cbox{background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);border-radius:12px;padding:12px 14px;min-width:60px;text-align:center;}
-.cbox-num{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:900;color:var(--blue);line-height:1;}
-.cbox-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
-.register-card{background:linear-gradient(135deg,rgba(59,130,246,0.12),rgba(16,185,129,0.08));border:2px dashed rgba(59,130,246,0.35);border-radius:20px;padding:28px;text-align:center;position:relative;}
-.register-card::before{content:'SECURE YOUR SPOT';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--card);padding:0 14px;color:var(--blue);font-size:11px;font-weight:800;letter-spacing:2px;}
-.spots-bar{margin-bottom:20px;}
-.spots-text{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:8px;}
-.spots-text span{color:var(--green);font-weight:700;}
-.progress-track{height:6px;background:rgba(255,255,255,0.05);border-radius:3px;overflow:hidden;}
-.progress-fill{height:100%;width:89%;background:linear-gradient(90deg,var(--green),var(--blue));border-radius:3px;animation:glow 2s ease infinite;}
-.cta-btn{display:block;width:100%;background:linear-gradient(90deg,var(--blue),#2563eb);color:#fff;text-decoration:none;padding:18px 32px;border-radius:14px;font-size:18px;font-weight:700;font-family:'Space Grotesk',sans-serif;margin-bottom:16px;transition:all 0.3s;box-shadow:0 8px 25px rgba(37,99,235,0.35);}
-.cta-btn:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(37,99,235,0.55);}
-.instruction{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:10px;padding:12px 16px;font-size:14px;color:#fca5a5;display:flex;align-items:center;gap:10px;}
-.instruction strong{color:#fff;}
-.brand-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:36px;animation:slideIn 0.5s ease;}
-.brand-name{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;color:var(--text);}
-.brand-name span{color:var(--green);}
-.brand-tagline{font-size:13px;color:var(--muted);margin-top:3px;}
-.live-pill{display:flex;align-items:center;gap:8px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);color:#f87171;padding:7px 14px;border-radius:50px;font-size:13px;font-weight:600;}
+@keyframes progressFill{from{width:0%;}to{width:89%;}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── Layout ── */
+.hero{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px 20px;}
+.container{max-width:1120px;width:100%;margin:0 auto;}
+
+/* ── Brand bar ── */
+.brand-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:40px;animation:slideIn 0.5s ease;}
+.brand-left{display:flex;flex-direction:column;}
+.brand-name{font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:700;color:var(--text);letter-spacing:-0.3px;}
+.brand-name span{color:var(--cyan);}
+.brand-tagline{font-size:12px;color:var(--muted);margin-top:3px;letter-spacing:0.3px;}
+.live-pill{display:flex;align-items:center;gap:8px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);color:#f87171;padding:7px 16px;border-radius:50px;font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;}
 .live-dot{width:8px;height:8px;background:#ef4444;border-radius:50%;animation:pulse 1s ease infinite;}
-.free-tag{display:inline-block;background:linear-gradient(90deg,var(--green),#059669);color:#000;font-size:12px;font-weight:800;padding:3px 10px;border-radius:6px;margin-left:8px;vertical-align:middle;}
-@media(max-width:768px){.main-grid{grid-template-columns:1fr;}.headline{font-size:52px;}.brand-bar{flex-direction:column;align-items:flex-start;gap:12px;}}
-</style>
-</head>
-<body>
-<div class="particles" id="particles"></div>
-<section class="hero">
-<div class="container">
-<div class="brand-bar">
-<div>
-<div class="brand-name">code2career<span>ai</span></div>
-<div class="brand-tagline">Guiding You Into Careers of the Future</div>
-</div>
-<div class="live-pill"><div class="live-dot"></div>Registration Open</div>
-</div>
-<div class="badge"><div class="badge-dot"></div>Free Live Workshop &mdash; 27 May 2026</div>
-<h1 class="headline">
-<span class="line1">AI TRAINING</span>
-<span class="line2">WORKSHOP</span>
-</h1>
-<p class="subhead">From <span>zero to AI-ready</span> in one evening. Learn the fundamentals, build your first model, and walk away with a career strategy that actually works.</p>
-<div class="main-grid">
-<div class="left-col">
-<div class="card">
-<div class="card-title">What you will learn</div>
-<div class="feature-item">
-<div class="feature-icon blue"><i class="fas fa-brain"></i></div>
-<div class="feature-text"><strong>AI Fundamentals</strong><span>Understand the core concepts that power modern AI systems</span></div>
-</div>
-<div class="feature-item">
-<div class="feature-icon green"><i class="fas fa-code"></i></div>
-<div class="feature-text"><strong>Build Real Models</strong><span>Hands-on practice with real datasets &mdash; no theory overload</span></div>
-</div>
-<div class="feature-item">
-<div class="feature-icon purple"><i class="fas fa-rocket"></i></div>
-<div class="feature-text"><strong>Career Roadmap</strong><span>Get a personalised path from where you are to where you want to be</span></div>
-</div>
-</div>
-<div class="bonus-card">
-<div class="bonus-badge">Bonus</div>
-<div class="bonus-text">Master <strong>PCTO Prompting</strong> for Career Transitions &mdash; exclusive framework shared only in this session</div>
-</div>
-<div class="register-card">
-<div class="spots-bar">
-<div class="spots-text"><span>89% spots filled</span><span>11 remaining</span></div>
-<div class="progress-track"><div class="progress-fill"></div></div>
-</div>
-<a href="https://code2careerai.com/contact" class="cta-btn"><i class="fas fa-bolt" style="margin-right:10px"></i>Register Yourself Free <span class="free-tag">FREE</span></a>
-<div class="instruction"><i class="fas fa-exclamation-circle"></i><span>Write <strong>AI Workshop</strong> in the message box when registering</span></div>
-</div>
-</div>
-<div class="right-col">
-<div class="event-card">
-<div class="card-title">Event Details</div>
-<div class="event-stat">
-<div class="event-stat-icon"><i class="fas fa-calendar-alt"></i></div>
-<div class="event-stat-info"><label>Date</label><strong>27 May, 2026</strong></div>
-</div>
-<div class="event-stat">
-<div class="event-stat-icon"><i class="fas fa-clock"></i></div>
-<div class="event-stat-info"><label>Time</label><strong>8:00 PM &mdash; 10:00 PM IST</strong></div>
-</div>
-<div class="event-stat">
-<div class="event-stat-icon"><i class="fas fa-user-tie"></i></div>
-<div class="event-stat-info"><label>Host</label><strong>code2careerai</strong></div>
-</div>
-<div class="event-stat">
-<div class="event-stat-icon"><i class="fas fa-video"></i></div>
-<div class="event-stat-info"><label>Mode</label><strong>Online &mdash; Live Interactive</strong></div>
-</div>
-<div class="countdown-section">
-<div class="countdown-label">Starts In</div>
-<div class="countdown-boxes">
-<div class="cbox"><div class="cbox-num" id="cd-h">00</div><div class="cbox-lbl">Hrs</div></div>
-<div class="cbox"><div class="cbox-num" id="cd-m">00</div><div class="cbox-lbl">Min</div></div>
-<div class="cbox"><div class="cbox-num" id="cd-s">00</div><div class="cbox-lbl">Sec</div></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<script>
-// Particles
-const container=document.getElementById('particles');
-const colors=['#3b82f6','#10b981','#6366f1','#8b5cf6'];
-for(let i=0;i<35;i++){const p=document.createElement('div');p.className='particle';const s=Math.random()*8+4;p.style.cssText=`width:${s}px;height:${s}px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${Math.random()*100}%;animation-duration:${Math.random()*20+10}s;animation-delay:${Math.random()*15}s;`;container.appendChild(p);}
-// Countdown to 27 May 2026 20:00 IST
-function tick(){const now=new Date();const target=new Date('2026-05-27T14:30:00Z');const diff=target-now;
-if(diff<=0){document.getElementById('cd-h').textContent='00';document.getElementById('cd-m').textContent='00';document.getElementById('cd-s').textContent='00';return;}
-const h=Math.floor(diff/3600000);const m=Math.floor((diff%3600000)/60000);const s=Math.floor((diff%60000)/1000);
-const fmt=n=>String(n).padStart(2,'0');
-document.getElementById('cd-h').textContent=fmt(h>99?99:h);document.getElementById('cd-m').textContent=fmt(m);document.getElementById('cd-s').textContent=fmt(s);}
-tick();setInterval(tick,1000);
-</script>
-</body>
-</html>
+
+/* ── Badge ── */
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.25);color:var(--green);padding:8px 20px;border-radius:50px;font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:28px;animation:slideIn 0.6s ease;}
+.badge-dot{width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 1.5s ease infinite;}
+
+/* ── Headline ── */
+.headline{font-family:'Space Grotesk',sans-serif;font-size:clamp(46px,7.5vw,88px);font-weight:900;line-height:0.93;margin-bottom:24px;animation:slideIn 0.7s ease;}
+.headline .line1{display:block;background:linear-gradient(135deg,#fff 0%,#93c5fd 40%,#67e8f9 70%,#fff 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 4s linear infinite;}
+.headline .line2{display:block;color:var(--cyan);text-shadow:0 0 50px rgba(6,182,212,0.5);}
+
+/* ── Subhead ── */
+.subhead{font-size:clamp(15px,2.2vw,19px);color:var(--muted);max-width:560px;line-height:1.75;margin-bottom:44px;animation:slideIn 0.8s ease;}
+.subhead span{color:var(--cyan);font-weight:600;}
+
+/* ── Main grid ── */
+.main-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:36px;align-items:start;animation:slideIn 0.9s ease;}
+.left-col{display:flex;flex-direction:column;gap:24px;}
+.right-col{display:flex;flex-direction:column;gap:20px;animation:slideInRight 0.9s ease;}
+
+/* ── Cards ── */
+.card{background:rgba(12,22,40,0.85);border:1px solid var(--border);border-radius:20px;padding:28px;backdrop-filter:blur(12px);transition:border-color 0.3s,transform 0.2s;}
+.card:hover{border-color:rgba(6,182,212,0.2);transform:translateY(-2px);}
+.card-title{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:20px;display:flex;align-items:center;gap:8px;}
+.card-title::before{content:'';width:20px;height:2px;background:var(--cyan);border-radius:1px;}
+
+/* ── Feature items ── */
+.feature-item{display:flex;align-items:center;gap:16px;padding:15px 0;border-bottom:1px solid rgba(255,255,255,0.04);}
+.feature-item:last-child{border-bottom:none;padding-bottom:0;}
+.feature-icon{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.feature-icon.blue{background:rgba(59,130,246,0.12);color:var(--blue);}
+.feature-icon.cyan{background:rgba(6,182,212,0.12);color:var(--cyan);}
+.feature-icon.green{background:rgba(16,185,129,0.12);color:var(--green);}
+.feature-icon.purple{background:rgba(139,92,246,0.12);color:#a78bfa;}
+.feature-text strong{display:block;color:var(--text);font-size:15px;font-weight:600;margin-bottom:3px;}
+.feature-text span{color:var(--muted);font-size:13px;line-height:1.5;}
+
+/* ── Bonus card ── */
+.bonus-card{background:linear-gradient(135deg,rgba(6,182,212,0.06),rgba(59,130,246,0.08));border:1px solid rgba(6,182,212,0.2);border-radius:16px;padding:18px 22px;display:flex;align-items:center;gap:14px;}
+.bonus-badge{background:linear-gradient(90deg,var(--cyan),var(--blue));color:#000;font-size:10px;font-weight:900;letter-spacing:1.5px;padding:5px 12px;border-radius:8px;text-transform:uppercase;flex-shrink:0;}
+.bonus-text{color:var(--text);font-size:14px;font-weight:500;line-height:1.5;}
+
+/* ── Event card (right) ── */
+.event-card{background:rgba(12,22,40,0.92);border:1px solid rgba(6,182,212,0.18);border-radius:22px;padding:28px;backdrop-filter:blur(12px);animation:glow 4s ease infinite;}
+.event-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,0.05);}
+.event-header-title{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:var(--text);}
+.event-header-badge{background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.25);color:var(--cyan);font-size:10px;font-weight:800;letter-spacing:1px;padding:4px 12px;border-radius:20px;text-transform:uppercase;}
+.event-stat{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.04);}
+.event-stat:last-of-type{border-bottom:none;}
+.event-stat-icon{width:46px;height:46px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.15);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:18px;flex-shrink:0;}
+.event-stat-info label{display:block;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
+.event-stat-info strong{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:var(--text);}
+
+/* ── Countdown ── */
+.countdown-section{text-align:center;padding:22px 0 10px;border-top:1px solid rgba(255,255,255,0.05);margin-top:14px;}
+.countdown-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
+.countdown-boxes{display:flex;justify-content:center;gap:10px;}
+.cbox{background:rgba(6,182,212,0.07);border:1px solid rgba(6,182,212,0.18);border-radius:14px;padding:14px 16px;min-width:64px;text-align:center;}
+.cbox-num{font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:900;color:var(--cyan);line-height:1;}
+.cbox-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-top:5px;}
+
+/* ── Register card ── */
+.register-card{background:linear-gradient(145deg,rgba(6,182,212,0.08),rgba(59,130,246,0.06));border:1.5px dashed rgba(6,182,212,0.3);border-radius:22px;padding:28px;text-align:center;position:relative;overflow:hidden;}
+.register-card::before{content:'SECURE YOUR SPOT';position:absolute;top:-12px;left:50%;transform:translateX(-
