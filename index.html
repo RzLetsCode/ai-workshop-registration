@@ -197,3 +197,186 @@ body::before {
 .feature-icon.blue{background:rgba(59,130,246,0.12);color:var(--blue);border-color:rgba(59,130,246,0.2);}
 .feature-icon.green{background:rgba(16,185,129,0.12);color:var(--green);border-color:rgba(16,185,129,0.2);}
 .feature-icon.purple{background:rgba(139,92,246,0.12);color:#a78bfa;border-color:rgba(139,92,246,0.2);}
+
+.feature-text strong{display:block;color:var(--text);font-size:16px;font-weight:700;font-family:'Space Grotesk',sans-serif;margin-bottom:6px;letter-spacing:0.2px;}
+.feature-text span{color:#94a3b8;font-size:13.5px;line-height:1.55;display:block;}
+
+.bonus-card{background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(34,211,238,0.08));border:1px solid rgba(34,211,238,0.25);border-radius:20px;padding:24px;display:flex;align-items:center;gap:18px;}
+.bonus-badge{background:linear-gradient(90deg, var(--green), #059669);color:#020617;font-size:11px;font-weight:900;letter-spacing:1px;padding:5px 12px;border-radius:6px;text-transform:uppercase;flex-shrink:0;font-family:'Space Grotesk',sans-serif;}
+.bonus-text{color:#e2e8f0;font-size:14.5px;line-height:1.5;}
+.bonus-text strong{color:var(--cyan);font-weight:700;}
+
+.register-card{background:rgba(15, 23, 42, 0.65);border-radius:24px;padding:36px;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);animation:shadowPulse 4s ease infinite;border:2px solid transparent;}
+.spots-bar{margin-bottom:24px;}
+.spots-text{display:flex;justify-content:space-between;font-size:13.5px;color:#94a3b8;margin-bottom:10px;}
+.spots-text span{color:var(--green);font-weight:700;}
+.progress-track{height:8px;background:rgba(255,255,255,0.03);border-radius:4px;overflow:hidden;border:1px solid rgba(255,255,255,0.01);}
+.progress-fill{height:100%;width:89%;background:linear-gradient(90deg,var(--green),var(--cyan));border-radius:4px;}
+
+.cta-btn{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;background:linear-gradient(90deg,var(--blue),#1d4ed8);color:#fff;text-decoration:none;padding:20px 32px;border-radius:16px;font-size:19px;font-weight:800;font-family:'Space Grotesk',sans-serif;margin-bottom:18px;transition:all 0.3s ease;box-shadow:0 8px 30px rgba(37,99,235,0.3);border:1px solid rgba(255,255,255,0.1);}
+.cta-btn:hover{transform:translateY(-3px);box-shadow:0 15px 45px rgba(37,99,235,0.5);border-color:rgba(255,255,255,0.25);}
+
+.instruction{background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.18);border-radius:12px;padding:14px 18px;font-size:13px;color:#fca5a5;display:flex;align-items:center;gap:12px;text-align:left;line-height:1.4;}
+.instruction i{font-size:15px;flex-shrink:0;color:#f87171;}
+.instruction strong{color:#fff;background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:4px;font-family:monospace;}
+.free-tag{background:linear-gradient(90deg,var(--green),#059669);color:#020617;font-size:11px;font-weight:900;padding:3px 8px;border-radius:5px;margin-left:4px;font-family:'Space Grotesk',sans-serif;}
+
+.meta-info-grid {display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px;}
+.meta-node {background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:14px;padding:14px 18px;}
+.meta-node label {display:block;font-size:10px;text-transform:uppercase;color:var(--muted);letter-spacing:1px;margin-bottom:4px;}
+.meta-node strong {font-size:14px;color:#e2e8f0;font-weight:600;}
+
+@media(max-width:992px){
+  body {padding-top: 104px;}
+  .top-ticker-bar {height: auto; padding: 12px 0;}
+  .ticker-container {flex-direction: column; gap: 10px; text-align: center;}
+  .main-grid{grid-template-columns:1fr;gap:40px;}
+  .left-col{position:relative;top:0;}
+}
+@media(max-width:768px){.hero{padding:40px 16px;}.headline{font-size:44px;}}
+</style>
+</head>
+<body>
+
+<div class="top-ticker-bar">
+  <div class="ticker-container">
+    <div class="ticker-status-node">
+      <div class="live-signal-badge">
+        <div class="live-signal-dot"></div>REGISTRATION_OPEN
+      </div>
+      <div class="ticker-callout-text">
+        Next Global Batch: <span>20 June 2026</span> // Live Classroom Connection
+      </div>
+    </div>
+    <div class="ticker-timer-mesh">
+      <div class="timer-label">CLOSING IN:</div>
+      <div class="ticker-cbox"><div class="ticker-cbox-num" id="cd-d">00</div><div class="ticker-cbox-lbl">Days</div></div>
+      <div class="ticker-cbox"><div class="ticker-cbox-num" id="cd-h">00</div><div class="ticker-cbox-lbl">Hrs</div></div>
+      <div class="ticker-cbox"><div class="ticker-cbox-num" id="cd-m">00</div><div class="ticker-cbox-lbl">Min</div></div>
+      <div class="ticker-cbox"><div class="ticker-cbox-num" id="cd-s">00</div><div class="ticker-cbox-lbl">Sec</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="particles" id="particles"></div>
+
+<section class="hero">
+  <div class="container">
+    
+    {/* Brand Platform Header */}
+    <div class="brand-block">
+      <div class="brand-name">code2career<span>_ai</span></div>
+      <div class="brand-tagline">Guiding You Into Careers of the Future</div>
+    </div>
+
+    <div class="badge-wrapper">
+      <div class="badge"><div class="badge-dot"></div>Free Live Masterclass &mdash; 20 June 2026</div>
+    </div>
+
+    <h1 class="headline">
+      <span class="line1">AI CAREER STRATEGY</span>
+      <span class="line2">MASTERCLASS</span>
+    </h1>
+    
+    <p class="subhead">Break through the noise. Discover a comprehensive <span>project roadmap</span>, building blocks for beginners, resume structures that clear ATS check walls, and enterprise hiring deployment keys.</p>
+
+    <div class="main-grid">
+      
+      <div class="left-col">
+        <div class="register-card">
+          <div class="spots-bar">
+            <div class="spots-text"><span>89% allocation confirmed</span><span>11 remaining seats</span></div>
+            <div class="progress-track"><div class="progress-fill"></div></div>
+          </div>
+          
+          <a href="https://code2careerai.com/contact" class="cta-btn">
+            <i class="fas fa-bolt"></i>Secure Free Workshop Entry <span class="free-tag">FREE</span>
+          </a>
+          
+          <div class="instruction">
+            <i class="fas fa-exclamation-circle"></i>
+            <span>Deployment requirement: Input explicit string <strong>AI Workshop</strong> inside the communication message box during verification.</span>
+          </div>
+
+          <div class="meta-info-grid">
+            <div class="meta-node"><label>EXECUTION TIME</label><strong>07:00 - 09:00 PM IST</strong></div>
+            <div class="meta-node"><label>NETWORK MODE</label><strong>Interactive Live</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-col">
+        <div class="card">
+          <div class="card-title">Curriculum Modules & Career Logic</div>
+          
+          <div class="feature-item">
+            <div class="feature-icon blue"><i class="fas fa-map-signs"></i></div>
+            <div class="feature-text">
+              <strong>Project Roadmap & Study Guide</strong>
+              <span>A detailed breakdown of exactly what to study as an AI beginner. Master core systems programming loops, orchestration tools, and real project timelines without theory fatigue.</span>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon green"><i class="fas fa-file-invoice"></i></div>
+            <div class="feature-text">
+              <strong>Production-Grade AI Resumes</strong>
+              <span>How to restructure your professional profile. Turn basic syntax notes into detailed, metrics-driven descriptions of layouts, systems architecture, and engineering discipline.</span>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon purple"><i class="fas fa-paper-plane"></i></div>
+            <div class="feature-text">
+              <strong>Corporate Outreach & Pitching</strong>
+              <span>The precise pipeline for approaching companies. Learn to present engineering capabilities directly to hiring nodes and skip generic application systems.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bonus-card">
+          <div class="bonus-badge">Live Case Study</div>
+          <div class="bonus-text">
+            Complete project walkthrough with real execution data for an <strong>insurance-claim-assistant</strong>. Watch how layout-aware RAG extraction parsing verifies policies dynamically.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+// Ambient Background Floating Sparks Generator
+const container=document.getElementById('particles');
+const colors=['#22d3ee','#3b82f6','#10b981','#6366f1'];
+for(let i=0;i<35;i++){const p=document.createElement('div');p.className='particle';const s=Math.random()*5+3;p.style.cssText=`width:${s}px;height:${s}px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${Math.random()*100}%;animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*10}s;`;container.appendChild(p);}
+
+// Sync Timer Framework Configuration Target: 20 June 2026 19:00 IST (14:00 UTC)
+function tick(){
+  const now=new Date();
+  const target=new Date('2026-06-20T14:00:00Z');
+  const diff=target-now;
+  if(diff Meso<=0){
+    document.getElementById('cd-d').textContent='00';
+    document.getElementById('cd-h').textContent='00';
+    document.getElementById('cd-m').textContent='00';
+    document.getElementById('cd-s').textContent='00';
+    return;
+  }
+  const d=Math.floor(diff/86400000);
+  const h=Math.floor((diff%86400000)/3600000);
+  const m=Math.floor((diff%3600000)/60000);
+  const s=Math.floor((diff%60000)/1000);
+  const fmt=n=>String(n).padStart(2,'0');
+  
+  document.getElementById('cd-d').textContent=fmt(d);
+  document.getElementById('cd-h').textContent=fmt(h);
+  document.getElementById('cd-m').textContent=fmt(m);
+  document.getElementById('cd-s').textContent=fmt(s);
+}
+tick();
+setInterval(tick,1000);
+</script>
+</body>
+</html>
