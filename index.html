@@ -85,9 +85,9 @@ body::before {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(16, 185, 129, 0.08);
-  border: 1px solid rgba(16, 185, 129, 0.25);
-  color: #059669;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #dc2626;
   padding: 6px 14px;
   border-radius: 8px;
   font-family: 'Space Grotesk', sans-serif;
@@ -98,7 +98,7 @@ body::before {
 .hud-pulse-dot {
   width: 6px;
   height: 6px;
-  background: var(--green);
+  background: #ef4444;
   border-radius: 50%;
   position: relative;
 }
@@ -106,7 +106,7 @@ body::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--green);
+  background: #ef4444;
   border-radius: 50%;
   animation: pulse 1s ease infinite;
   transform: scale(2.5);
@@ -118,8 +118,8 @@ body::before {
   letter-spacing: 0.3px;
 }
 .hud-broadcast-string span {
-  color: var(--text-main);
-  font-weight: 600;
+  color: #dc2626;
+  font-weight: 700;
 }
 .hud-timer-mesh {
   display: flex;
@@ -207,9 +207,9 @@ body::before {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(79, 70, 229, 0.05);
-  border: 1px solid rgba(79, 70, 229, 0.2);
-  color: var(--indigo);
+  background: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #dc2626;
   padding: 8px 18px;
   border-radius: 50px;
   font-size: 12px;
@@ -220,7 +220,7 @@ body::before {
 .badge-dot {
   width: 6px;
   height: 6px;
-  background: var(--indigo);
+  background: #ef4444;
   border-radius: 50%;
 }
 
@@ -290,8 +290,8 @@ body::before {
   border: 2px solid transparent;
 }
 .protocol-badge {
-  background: rgba(79, 70, 229, 0.04);
-  border: 1px solid rgba(79, 70, 229, 0.15);
+  background: rgba(239, 68, 68, 0.04);
+  border: 1px solid rgba(239, 68, 68, 0.15);
   border-radius: 10px;
   padding: 12px;
   text-align: center;
@@ -301,7 +301,7 @@ body::before {
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 2px;
-  color: var(--indigo);
+  color: #ef4444;
   margin-bottom: 3px;
   font-family: 'Space Grotesk', sans-serif;
 }
@@ -309,7 +309,7 @@ body::before {
   font-family: monospace;
   font-size: 11px;
   font-weight: 700;
-  color: var(--text-main);
+  color: #b91c1c;
   letter-spacing: 0.5px;
 }
 .action-button {
@@ -318,7 +318,7 @@ body::before {
   justify-content: center;
   gap: 12px;
   width: 100%;
-  background: var(--indigo);
+  background: #dc2626;
   color: #ffffff;
   text-decoration: none;
   padding: 18px 28px;
@@ -327,11 +327,11 @@ body::before {
   font-weight: 800;
   font-family: 'Space Grotesk', sans-serif;
   transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.25);
+  box-shadow: 0 8px 25px rgba(220, 38, 38, 0.25);
 }
 .action-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(79, 70, 229, 0.35);
+  box-shadow: 0 12px 30px rgba(220, 38, 38, 0.35);
 }
 .action-button span {
   background: rgba(255, 255, 255, 0.15);
@@ -596,11 +596,6 @@ body::before {
   box-shadow: 0 2px 8px rgba(0,0,0,0.02);
 }
 
-/* ========================================== */
-/* VIBRANT HIGH-CONTRAST BRAND HOVERS      */
-/* ========================================== */
-
-/* YouTube Node: Vibrant Red */
 .footer-icon-link.yt-link:hover {
   border-color: #ef4444;
   color: #ef4444;
@@ -611,7 +606,6 @@ body::before {
   color: #ef4444;
 }
 
-/* LinkedIn Node: Deep Corporate Blue */
 .footer-icon-link.li-link:hover {
   border-color: #0077b5;
   color: #0077b5;
@@ -622,7 +616,6 @@ body::before {
   color: #0077b5;
 }
 
-/* Engineering Blog Node: Terminal Teal */
 .footer-icon-link.blog-link:hover {
   border-color: #06b6d4;
   color: #06b6d4;
@@ -660,7 +653,7 @@ body::before {
   .top-media-showcase, .bottom-content-matrix { grid-template-columns: 1fr; gap: 32px; }
   .brand-strip { flex-direction: column; align-items: flex-start; gap: 8px; }
   .footer-cta-panel { grid-template-columns: 1fr; gap: 32px; padding: 32px; }
-  .footer-ecosystem-bar { flex-direction: column; gap: 20px; text-align: center; }
+  .footer-ecosystem-bar { flex-direction: column; gap: 20px; text-transform: center; }
 }
 </style>
 </head>
@@ -670,14 +663,14 @@ body::before {
   <div class="hud-container">
     <div class="hud-meta-node">
       <div class="hud-pulse-tag">
-        <div class="hud-pulse-dot"></div>REGISTRATION_OPEN
+        <div class="hud-pulse-dot"></div>CLOSING_SOON
       </div>
       <div class="hud-broadcast-string">
-        Global Live Drop: <span>20 June 2026</span>
+        Official Launch: <span>Batch-050726 Starts Next Week!</span>
       </div>
     </div>
     <div class="hud-timer-mesh">
-      <div class="mesh-label">WORKSHOP START IN :</div>
+      <div class="mesh-label">REGISTRATION CLOSES IN :</div>
       <div class="hud-clock-row">
         <div class="hud-cbox"><div class="hud-cbox-num" id="cd-d">00</div><div class="hud-cbox-lbl">Days</div></div>
         <div class="hud-cbox"><div class="hud-cbox-num" id="cd-h">00</div><div class="hud-cbox-lbl">Hrs</div></div>
@@ -698,7 +691,7 @@ body::before {
         <div class="brand-logo">code2career<span>_ai</span></div>
         <div class="brand-subtext">Guiding You Into Careers of the Future</div>
       </div>
-      <div class="badge"><div class="badge-dot"></div>Free Live Masterclass &mdash; 20 June 2026</div>
+      <div class="badge"><div class="badge-dot"></div>Hurry Up — Fast Registration Open</div>
     </div>
 
     <div class="header-hero-block">
@@ -706,7 +699,7 @@ body::before {
         <span class="gradient-span">AI CAREER STRATEGY</span> MASTERCLASS.
       </h1>
       <p class="main-summary">
-        Break through the noise. Discover a comprehensive <span>project roadmap</span>, building blocks for beginners, resume structures that clear ATS check walls, and enterprise hiring deployment keys.
+        Break through the noise. Secure your spot for <span>Batch-050726</span> launching next week. Master a comprehensive project roadmap, automated ATS clearing layouts, and industrial production architectures.
       </p>
     </div>
 
@@ -722,17 +715,17 @@ body::before {
       <div class="terminal-card">
         
         <div class="protocol-badge">
-          <span class="status-lbl">ACCESS CONTROL // DEPLOYMENT</span>
-          <span class="status-main">OPEN TO ALL (FIRST-COME PROTOCOL)</span>
+          <span class="status-lbl">BATCH SEAT DEPLOYMENT // LIMIT REACHED</span>
+          <span class="status-main">BATCH-050726 CLOSING PROTOCOL</span>
         </div>
         
         <a href="https://code2careerai.com/contact" class="action-button">
-          Register Free Masterclass <span>FREE</span>
+          Hurry Up — Register Fast <span>LIVE</span>
         </a>
         
         <div class="spec-info-grid">
-          <div class="spec-box"><label>TIME STAMP</label><span>07:00 - 09:00 PM IST</span></div>
-          <div class="spec-box"><label>SESSION MODE</label><span>Interactive Live</span></div>
+          <div class="spec-box"><label>BATCH ID</label><span>Batch-050726</span></div>
+          <div class="spec-box"><label>TIMELINE</label><span>Starts Next Week</span></div>
           <div class="spec-box"><label>HOST HUB</label><span>code2career_ai</span></div>
           <div class="spec-box"><label>PREREQUISITE</label><span>Basic Code Literacy</span></div>
         </div>
@@ -791,18 +784,18 @@ body::before {
       <div class="footer-cta-panel">
         
         <div class="footer-text-side">
-          <span class="footer-badge">Take the Next Step</span>
+          <span class="footer-badge">Last Call For Registration</span>
           <h2>Your AI portfolio starts here.</h2>
-          <p>Whether you're a fresher finding your path or a professional pivoting into AI — get a <span>concrete roadmap</span>, production-grade portfolio projects, and <span>1:1 mentorship</span> built around your goals.</p>
+          <p>Whether you're a fresher finding your path or a professional pivoting into AI — secure your entry into <span>Batch-050726</span> before registration lines lock down completely.</p>
         </div>
 
         <div class="footer-action-side">
           <a href="https://code2careerai.com/contact" class="footer-cta-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-calendar-check"></i> Book a Free Strategy Call
+            <i class="fas fa-calendar-check"></i> Book Your Free Strategy Call
           </a>
           <div class="footer-meta-bullets">
             <div class="footer-bullet"><i class="fas fa-bolt"></i> Free 30-min strategy deep dive</div>
-            <div class="footer-bullet"><i class="fas fa-clock"></i> Callback response within 24 hours</div>
+            <div class="footer-bullet"><i class="fas fa-clock"></i> Final remaining slots for this batch</div>
             <div class="footer-bullet"><i class="fas fa-shield-alt"></i> Zero commitment parameter threshold</div>
           </div>
         </div>
@@ -846,7 +839,15 @@ for(let i=0;i<25;i++){
 
 function runTimer(){
   const present=new Date();
-  const launchWindow=new Date('2026-06-20T13:30:00Z');
+  // Set timer targeting 5 days from now to give realistic urgent pressure for next week's kickoff
+  const countdownTarget=new Date(present.getTime() + (5 * 24 * 60 * 60 * 1000));
+  
+  // Checking local storage so the timer stays consistent for the visitor on refreshing
+  if(!localStorage.getItem('batch_timer_target')){
+    localStorage.setItem('batch_timer_target', countdownTarget.toISOString());
+  }
+  
+  const launchWindow=new Date(localStorage.getItem('batch_timer_target'));
   const distance=launchWindow-present;
   
   if(distance<=0){
