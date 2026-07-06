@@ -15,6 +15,8 @@
   --blue: #2563eb;
   --indigo: #4f46e5;
   --green: #10b981;
+  --purple: #7c3aed;
+  --purple-glow: rgba(124, 58, 237, 0.35);
   --light-bg: #f8fafc;
   --surface: #ffffff;
   --border: rgba(15, 23, 42, 0.08);
@@ -49,7 +51,20 @@ body::before {
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
 @keyframes slideUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
 @keyframes shadowPulse{0%,100%{box-shadow:0 10px 30px var(--glow-shadow); border-color: rgba(79, 70, 229, 0.15);}50%{box-shadow:0 15px 40px rgba(79, 70, 229, 0.25); border-color: rgba(79, 70, 229, 0.4);}}
-@keyframes shimmer{0%{background-position:-200% center;}100%{background-position:200% center;}}
+
+/* Premium Continuous Button Pulse & Shimmer Animation Framework */
+@keyframes dynamicGlowBlink {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8px 24px rgba(79, 70, 229, 0.25);
+    background: var(--indigo);
+  }
+  50% {
+    transform: scale(1.025);
+    box-shadow: 0 14px 35px var(--purple-glow);
+    background: var(--purple);
+  }
+}
 
 .top-hud-panel {
   position: fixed;
@@ -85,9 +100,9 @@ body::before {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(239, 68, 68, 0.08);
-  border: 1px solid rgba(239, 68, 68, 0.25);
-  color: #dc2626;
+  background: rgba(124, 58, 237, 0.08);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  color: var(--purple);
   padding: 6px 14px;
   border-radius: 8px;
   font-family: 'Space Grotesk', sans-serif;
@@ -98,7 +113,7 @@ body::before {
 .hud-pulse-dot {
   width: 6px;
   height: 6px;
-  background: #ef4444;
+  background: var(--purple);
   border-radius: 50%;
   position: relative;
 }
@@ -106,9 +121,9 @@ body::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: #ef4444;
+  background: var(--purple);
   border-radius: 50%;
-  animation: pulse 1s ease infinite;
+  animation: pulse 1.2s ease infinite;
   transform: scale(2.5);
   opacity: 0.4;
 }
@@ -118,7 +133,7 @@ body::before {
   letter-spacing: 0.3px;
 }
 .hud-broadcast-string span {
-  color: #dc2626;
+  color: var(--purple);
   font-weight: 700;
 }
 .hud-timer-mesh {
@@ -207,9 +222,9 @@ body::before {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(239, 68, 68, 0.05);
-  border: 1px solid rgba(239, 68, 68, 0.2);
-  color: #dc2626;
+  background: rgba(124, 58, 237, 0.05);
+  border: 1px solid rgba(124, 58, 237, 0.15);
+  color: var(--purple);
   padding: 8px 18px;
   border-radius: 50px;
   font-size: 12px;
@@ -220,7 +235,7 @@ body::before {
 .badge-dot {
   width: 6px;
   height: 6px;
-  background: #ef4444;
+  background: var(--purple);
   border-radius: 50%;
 }
 
@@ -290,8 +305,8 @@ body::before {
   border: 2px solid transparent;
 }
 .protocol-badge {
-  background: rgba(239, 68, 68, 0.04);
-  border: 1px solid rgba(239, 68, 68, 0.15);
+  background: rgba(124, 58, 237, 0.04);
+  border: 1px solid rgba(124, 58, 237, 0.15);
   border-radius: 10px;
   padding: 12px;
   text-align: center;
@@ -301,7 +316,7 @@ body::before {
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 2px;
-  color: #ef4444;
+  color: var(--purple);
   margin-bottom: 3px;
   font-family: 'Space Grotesk', sans-serif;
 }
@@ -309,16 +324,17 @@ body::before {
   font-family: monospace;
   font-size: 11px;
   font-weight: 700;
-  color: #b91c1c;
+  color: var(--text-main);
   letter-spacing: 0.5px;
 }
+
+/* Continuous Subtle Pulsing Animated Button */
 .action-button {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
   width: 100%;
-  background: #dc2626;
   color: #ffffff;
   text-decoration: none;
   padding: 18px 28px;
@@ -326,12 +342,14 @@ body::before {
   font-size: 17px;
   font-weight: 800;
   font-family: 'Space Grotesk', sans-serif;
-  transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 8px 25px rgba(220, 38, 38, 0.25);
+  transition: transform 0.2s ease-in-out;
+  animation: dynamicGlowBlink 3s infinite ease-in-out;
 }
 .action-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(220, 38, 38, 0.35);
+  animation-play-state: paused; /* Halts animation cleanly for crisp interaction */
+  transform: translateY(-2px) scale(1.03);
+  background: var(--purple);
+  box-shadow: 0 12px 30px rgba(124, 58, 237, 0.45);
 }
 .action-button span {
   background: rgba(255, 255, 255, 0.15);
@@ -455,18 +473,18 @@ body::before {
   display: flex;
   align-items: start;
   gap: 12px;
-  background: rgba(239,68,68,0.03);
-  border: 1px solid rgba(239,68,68,0.15);
+  background: rgba(124, 58, 237, 0.02);
+  border: 1px solid rgba(124, 58, 237, 0.1);
   padding: 16px 20px;
   border-radius: 16px;
 }
 .terminal-instruction i {
-  color: #ef4444;
+  color: var(--purple);
   margin-top: 2px;
 }
 .terminal-instruction strong {
-  color: #b91c1c;
-  background: rgba(239,68,68,0.08);
+  color: var(--purple);
+  background: rgba(124, 58, 237, 0.06);
   padding: 1px 5px;
   border-radius: 4px;
   font-family: monospace;
@@ -523,12 +541,13 @@ body::before {
   flex-direction: column;
   gap: 16px;
 }
+
+/* Footer Action Button with Staggered Breathing Glow */
 .footer-cta-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: var(--text-main);
   color: #ffffff;
   text-decoration: none;
   padding: 18px 28px;
@@ -537,11 +556,13 @@ body::before {
   font-size: 16px;
   font-weight: 700;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.15);
+  animation: dynamicGlowBlink 3s infinite ease-in-out;
+  animation-delay: 0.6s;
 }
 .footer-cta-btn:hover {
+  animation-play-state: paused;
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.25);
+  background: var(--purple);
 }
 .footer-meta-bullets {
   display: flex;
@@ -663,14 +684,14 @@ body::before {
   <div class="hud-container">
     <div class="hud-meta-node">
       <div class="hud-pulse-tag">
-        <div class="hud-pulse-dot"></div>CLOSING_SOON
+        <div class="hud-pulse-dot"></div>BATCH_LAUNCH
       </div>
       <div class="hud-broadcast-string">
-        Official Launch: <span>Batch-050726 Starts Next Week!</span>
+        Official Kickoff: <span>Batch-050726 Starts Next Week!</span>
       </div>
     </div>
     <div class="hud-timer-mesh">
-      <div class="mesh-label">REGISTRATION CLOSES IN :</div>
+      <div class="mesh-label">REGISTRATION WINDOW ACTIVE :</div>
       <div class="hud-clock-row">
         <div class="hud-cbox"><div class="hud-cbox-num" id="cd-d">00</div><div class="hud-cbox-lbl">Days</div></div>
         <div class="hud-cbox"><div class="hud-cbox-num" id="cd-h">00</div><div class="hud-cbox-lbl">Hrs</div></div>
@@ -691,7 +712,7 @@ body::before {
         <div class="brand-logo">code2career<span>_ai</span></div>
         <div class="brand-subtext">Guiding You Into Careers of the Future</div>
       </div>
-      <div class="badge"><div class="badge-dot"></div>Hurry Up — Fast Registration Open</div>
+      <div class="badge"><div class="badge-dot"></div>Batch-050726 — Secure Your Entry Slot</div>
     </div>
 
     <div class="header-hero-block">
@@ -715,12 +736,12 @@ body::before {
       <div class="terminal-card">
         
         <div class="protocol-badge">
-          <span class="status-lbl">BATCH SEAT DEPLOYMENT // LIMIT REACHED</span>
-          <span class="status-main">BATCH-050726 CLOSING PROTOCOL</span>
+          <span class="status-lbl">BATCH SEAT DEPLOYMENT // CORE VERIFIED</span>
+          <span class="status-main">BATCH-050726 REGISTRATION OPEN</span>
         </div>
         
         <a href="https://code2careerai.com/contact" class="action-button">
-          Hurry Up — Register Fast <span>LIVE</span>
+          Secure Your Entry Slot <span>LIVE</span>
         </a>
         
         <div class="spec-info-grid">
@@ -784,9 +805,9 @@ body::before {
       <div class="footer-cta-panel">
         
         <div class="footer-text-side">
-          <span class="footer-badge">Last Call For Registration</span>
+          <span class="footer-badge">Upcoming Strategy Session</span>
           <h2>Your AI portfolio starts here.</h2>
-          <p>Whether you're a fresher finding your path or a professional pivoting into AI — secure your entry into <span>Batch-050726</span> before registration lines lock down completely.</p>
+          <p>Whether you're a fresher finding your path or a professional pivoting into AI — confirm your enrollment for <span>Batch-050726</span> before session launch configurations lock down.</p>
         </div>
 
         <div class="footer-action-side">
@@ -795,7 +816,7 @@ body::before {
           </a>
           <div class="footer-meta-bullets">
             <div class="footer-bullet"><i class="fas fa-bolt"></i> Free 30-min strategy deep dive</div>
-            <div class="footer-bullet"><i class="fas fa-clock"></i> Final remaining slots for this batch</div>
+            <div class="footer-bullet"><i class="fas fa-clock"></i> Callback setup parameters active</div>
             <div class="footer-bullet"><i class="fas fa-shield-alt"></i> Zero commitment parameter threshold</div>
           </div>
         </div>
@@ -839,10 +860,8 @@ for(let i=0;i<25;i++){
 
 function runTimer(){
   const present=new Date();
-  // Set timer targeting 5 days from now to give realistic urgent pressure for next week's kickoff
   const countdownTarget=new Date(present.getTime() + (5 * 24 * 60 * 60 * 1000));
   
-  // Checking local storage so the timer stays consistent for the visitor on refreshing
   if(!localStorage.getItem('batch_timer_target')){
     localStorage.setItem('batch_timer_target', countdownTarget.toISOString());
   }
