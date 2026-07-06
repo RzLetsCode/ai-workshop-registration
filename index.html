@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<!--ADDING COMMEMTS for fast deployment --->
+<!-- SECURE PREMIUM DEPLOYMENT - BATCH_050726 -->
 <html lang="en">
 <head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CXR5JD8BF9"></script>
@@ -18,13 +17,13 @@
   --indigo: #4f46e5;
   --green: #10b981;
   --purple: #7c3aed;
-  --purple-glow: rgba(124, 58, 237, 0.35);
-  --light-bg: #f8fafc;
-  --surface: #ffffff;
-  --border: rgba(15, 23, 42, 0.08);
-  --text-main: #0f172a;
-  --text-muted: #64748b;
-  --glow-shadow: rgba(79, 70, 229, 0.08);
+  --purple-glow: rgba(124, 58, 237, 0.25);
+  --light-bg: #0b0f19; /* Switched to an immersive dark canvas for elite engineering focus */
+  --surface: #161b26;
+  --border: rgba(255, 255, 255, 0.08);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --glow-shadow: rgba(79, 70, 229, 0.15);
 }
 body{
   background: var(--light-bg);
@@ -39,32 +38,33 @@ body::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, rgba(148, 163, 184, 0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(148, 163, 184, 0.12) 1px, transparent 1px);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
   background-size: 3.5rem 3.5rem;
-  mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 80%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 80%, transparent 100%);
+  mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%);
   opacity: 0.8;
   pointer-events: none;
   z-index: 0;
 }
 .particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:hidden;}
-.particle{position:absolute;border-radius:50%;animation:float linear infinite;opacity:0.15;}
-@keyframes float{0%{transform:translateY(100vh);opacity:0;}10%{opacity:0.15;}90%{opacity:0.15;}100%{transform:translateY(-50px);opacity:0;}}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
-@keyframes slideUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
-@keyframes shadowPulse{0%,100%{box-shadow:0 10px 30px var(--glow-shadow); border-color: rgba(79, 70, 229, 0.15);}50%{box-shadow:0 15px 40px rgba(79, 70, 229, 0.25); border-color: rgba(79, 70, 229, 0.4);}}
+.particle{position:absolute;border-radius:50%;animation:float linear infinite;opacity:0.2;}
 
-/* Premium Continuous Button Pulse & Shimmer Animation Framework */
+@keyframes float{0%{transform:translateY(100vh);opacity:0;}10%{opacity:0.2;}90%{opacity:0.2;}100%{transform:translateY(-50px);opacity:0;}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+@keyframes slideUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes breathingFrame{0%,100%{box-shadow:0 20px 50px rgba(79, 70, 229, 0.05); border-color: rgba(79, 70, 229, 0.15);}50%{box-shadow:0 25px 60px rgba(79, 70, 229, 0.18); border-color: rgba(6, 182, 212, 0.4);}}
+@keyframes neonPulse{0%,100%{box-shadow:0 0 12px rgba(16, 185, 129, 0.2); background: rgba(16, 185, 129, 0.1);}50%{box-shadow:0 0 24px rgba(16, 185, 129, 0.5); background: rgba(16, 185, 129, 0.2);}}
+
 @keyframes dynamicGlowBlink {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 8px 24px rgba(79, 70, 229, 0.25);
-    background: var(--indigo);
+    box-shadow: 0 8px 24px rgba(79, 70, 229, 0.3);
+    background: linear-gradient(135deg, var(--indigo), var(--blue));
   }
   50% {
-    transform: scale(1.025);
-    box-shadow: 0 14px 35px var(--purple-glow);
-    background: var(--purple);
+    transform: scale(1.02);
+    box-shadow: 0 14px 35px rgba(124, 58, 237, 0.4);
+    background: linear-gradient(135deg, var(--purple), var(--indigo));
   }
 }
 
@@ -74,7 +74,7 @@ body::before {
   left: 16px;
   right: 16px;
   height: 64px;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(22, 27, 38, 0.8);
   border: 1px solid var(--border);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
@@ -82,7 +82,7 @@ body::before {
   z-index: 1000;
   display: flex;
   align-items: center;
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04), inset 0 1px 0 rgba(255,255,255,0.6);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
 }
 .hud-container {
   max-width: 1300px;
@@ -102,9 +102,9 @@ body::before {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(124, 58, 237, 0.08);
-  border: 1px solid rgba(124, 58, 237, 0.2);
-  color: var(--purple);
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  color: var(--cyan);
   padding: 6px 14px;
   border-radius: 8px;
   font-family: 'Space Grotesk', sans-serif;
@@ -115,7 +115,7 @@ body::before {
 .hud-pulse-dot {
   width: 6px;
   height: 6px;
-  background: var(--purple);
+  background: var(--cyan);
   border-radius: 50%;
   position: relative;
 }
@@ -123,11 +123,11 @@ body::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--purple);
+  background: var(--cyan);
   border-radius: 50%;
   animation: pulse 1.2s ease infinite;
   transform: scale(2.5);
-  opacity: 0.4;
+  opacity: 0.5;
 }
 .hud-broadcast-string {
   font-size: 12.5px;
@@ -135,7 +135,7 @@ body::before {
   letter-spacing: 0.3px;
 }
 .hud-broadcast-string span {
-  color: var(--purple);
+  color: var(--cyan);
   font-weight: 700;
 }
 .hud-timer-mesh {
@@ -146,7 +146,7 @@ body::before {
 .hud-timer-mesh .mesh-label {
   font-size: 10px;
   font-weight: 800;
-  color: #94a3b8;
+  color: #64748b;
   letter-spacing: 2px;
 }
 .hud-clock-row {
@@ -155,8 +155,8 @@ body::before {
   gap: 4px;
 }
 .hud-cbox {
-  background: rgba(15, 23, 42, 0.03);
-  border: 1px solid rgba(15, 23, 42, 0.05);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 6px;
   padding: 4px 8px;
   min-width: 46px;
@@ -166,12 +166,12 @@ body::before {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 16px;
   font-weight: 700;
-  color: var(--indigo);
+  color: var(--cyan);
   line-height: 1.1;
 }
 .hud-cbox-lbl {
   font-size: 7.5px;
-  color: #94a3b8;
+  color: #64748b;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-weight: 600;
@@ -207,7 +207,7 @@ body::before {
   color: var(--text-main);
 }
 .brand-logo span {
-  background: linear-gradient(to right, var(--indigo), var(--blue));
+  background: linear-gradient(to right, var(--cyan), var(--blue));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -224,9 +224,9 @@ body::before {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(124, 58, 237, 0.05);
-  border: 1px solid rgba(124, 58, 237, 0.15);
-  color: var(--purple);
+  background: rgba(6, 182, 212, 0.05);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  color: var(--cyan);
   padding: 8px 18px;
   border-radius: 50px;
   font-size: 12px;
@@ -237,12 +237,12 @@ body::before {
 .badge-dot {
   width: 6px;
   height: 6px;
-  background: var(--purple);
+  background: var(--cyan);
   border-radius: 50%;
 }
 
 .header-hero-block {
-  animation: slideUp 0.55s ease;
+  header-hero-block: slideUp 0.55s ease;
 }
 .main-title {
   font-family: 'Space Grotesk', sans-serif;
@@ -254,7 +254,7 @@ body::before {
   color: var(--text-main);
 }
 .main-title .gradient-span {
-  background: linear-gradient(135deg, var(--text-main) 40%, var(--indigo) 100%);
+  background: linear-gradient(135deg, var(--text-main) 30%, var(--cyan) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -265,7 +265,7 @@ body::before {
   max-width: 740px;
 }
 .main-summary span {
-  color: var(--text-main);
+  color: var(--cyan);
   font-weight: 600;
 }
 
@@ -285,7 +285,7 @@ body::before {
   border: 1px solid var(--border);
   border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 .video-module video {
   width: 100%;
@@ -296,29 +296,29 @@ body::before {
 
 .terminal-card {
   background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: 24px;
   padding: 36px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.04);
-  animation: shadowPulse 4s ease infinite;
-  border: 2px solid transparent;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  animation: breathingFrame 4s ease infinite;
+  border: 1px solid rgba(79, 70, 229, 0.15);
 }
 .protocol-badge {
-  background: rgba(124, 58, 237, 0.04);
-  border: 1px solid rgba(124, 58, 237, 0.15);
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.25);
   border-radius: 10px;
   padding: 12px;
   text-align: center;
+  animation: neonPulse 2.5s infinite ease-in-out;
 }
 .protocol-badge .status-lbl {
   display: block;
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 2px;
-  color: var(--purple);
+  color: var(--green);
   margin-bottom: 3px;
   font-family: 'Space Grotesk', sans-serif;
 }
@@ -326,11 +326,10 @@ body::before {
   font-family: monospace;
   font-size: 11px;
   font-weight: 700;
-  color: var(--text-main);
+  color: #ffffff;
   letter-spacing: 0.5px;
 }
 
-/* Continuous Subtle Pulsing Animated Button */
 .action-button {
   display: flex;
   align-items: center;
@@ -348,13 +347,11 @@ body::before {
   animation: dynamicGlowBlink 3s infinite ease-in-out;
 }
 .action-button:hover {
-  animation-play-state: paused; /* Halts animation cleanly for crisp interaction */
-  transform: translateY(-2px) scale(1.03);
-  background: var(--purple);
-  box-shadow: 0 12px 30px rgba(124, 58, 237, 0.45);
+  animation-play-state: paused;
+  transform: translateY(-2px) scale(1.02);
 }
 .action-button span {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.2);
   color: #ffffff;
   font-size: 10px;
   font-weight: 900;
@@ -367,7 +364,7 @@ body::before {
   gap: 12px;
 }
 .spec-box {
-  background: var(--light-bg);
+  background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 10px 14px;
@@ -413,7 +410,7 @@ body::before {
   content: '';
   width: 12px;
   height: 1px;
-  background: var(--indigo);
+  background: var(--cyan);
 }
 .module-layer {
   position: relative;
@@ -422,13 +419,13 @@ body::before {
   transition: border-color 0.3s;
 }
 .module-layer:hover {
-  border-color: var(--indigo);
+  border-color: var(--cyan);
 }
 .module-index {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 11px;
   font-weight: 700;
-  color: var(--indigo);
+  color: var(--cyan);
   opacity: 0.8;
   margin-bottom: 4px;
 }
@@ -446,8 +443,8 @@ body::before {
 }
 
 .showcase-block {
-  background: linear-gradient(90deg, rgba(79, 70, 229, 0.03) 0%, transparent 100%);
-  border-left: 2px solid var(--indigo);
+  background: linear-gradient(90deg, rgba(6, 182, 212, 0.04) 0%, transparent 100%);
+  border-left: 2px solid var(--cyan);
   padding: 24px;
   border-radius: 0 16px 16px 0;
 }
@@ -455,13 +452,13 @@ body::before {
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 1.5px;
-  color: var(--indigo);
+  color: var(--cyan);
   text-transform: uppercase;
   margin-bottom: 6px;
 }
 .showcase-desc {
   font-size: 14px;
-  color: #334155;
+  color: var(--text-muted);
   line-height: 1.55;
 }
 .showcase-desc strong {
@@ -470,23 +467,23 @@ body::before {
 
 .terminal-instruction {
   font-size: 12.5px;
-  color: #64748b;
+  color: var(--text-muted);
   line-height: 1.5;
   display: flex;
   align-items: start;
   gap: 12px;
-  background: rgba(124, 58, 237, 0.02);
-  border: 1px solid rgba(124, 58, 237, 0.1);
+  background: rgba(6, 182, 212, 0.02);
+  border: 1px solid rgba(6, 182, 212, 0.1);
   padding: 16px 20px;
   border-radius: 16px;
 }
 .terminal-instruction i {
-  color: var(--purple);
+  color: var(--cyan);
   margin-top: 2px;
 }
 .terminal-instruction strong {
-  color: var(--purple);
-  background: rgba(124, 58, 237, 0.06);
+  color: var(--cyan);
+  background: rgba(6, 182, 212, 0.08);
   padding: 1px 5px;
   border-radius: 4px;
   font-family: monospace;
@@ -508,14 +505,14 @@ body::before {
   grid-template-columns: 1.2fr 0.8fr;
   gap: 40px;
   align-items: center;
-  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.02);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
 }
 .footer-text-side .footer-badge {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 2px;
-  color: var(--indigo);
+  color: var(--cyan);
   text-transform: uppercase;
   margin-bottom: 12px;
   display: block;
@@ -535,7 +532,7 @@ body::before {
   line-height: 1.6;
 }
 .footer-text-side p span {
-  color: var(--text-main);
+  color: var(--cyan);
   font-weight: 600;
 }
 .footer-action-side {
@@ -544,7 +541,6 @@ body::before {
   gap: 16px;
 }
 
-/* Footer Action Button with Staggered Breathing Glow */
 .footer-cta-btn {
   display: flex;
   align-items: center;
@@ -564,7 +560,6 @@ body::before {
 .footer-cta-btn:hover {
   animation-play-state: paused;
   transform: translateY(-2px);
-  background: var(--purple);
 }
 .footer-meta-bullets {
   display: flex;
@@ -581,7 +576,7 @@ body::before {
 }
 .footer-bullet i {
   font-size: 10px;
-  color: var(--indigo);
+  color: var(--cyan);
 }
 
 .footer-ecosystem-bar {
@@ -616,7 +611,7 @@ body::before {
   text-decoration: none;
   position: relative;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 .footer-icon-link.yt-link:hover {
@@ -625,28 +620,17 @@ body::before {
   box-shadow: 0 4px 14px rgba(239, 68, 68, 0.2);
   transform: translateY(-2px);
 }
-.footer-icon-link.yt-link:hover::after {
-  color: #ef4444;
-}
-
 .footer-icon-link.li-link:hover {
   border-color: #0077b5;
   color: #0077b5;
   box-shadow: 0 4px 14px rgba(0, 119, 181, 0.2);
   transform: translateY(-2px);
 }
-.footer-icon-link.li-link:hover::after {
-  color: #0077b5;
-}
-
 .footer-icon-link.blog-link:hover {
   border-color: #06b6d4;
   color: #06b6d4;
   box-shadow: 0 4px 14px rgba(6, 182, 212, 0.2);
   transform: translateY(-2px);
-}
-.footer-icon-link.blog-link:hover::after {
-  color: #06b6d4;
 }
 
 .footer-icon-link::after {
@@ -663,6 +647,7 @@ body::before {
   opacity: 0;
   pointer-events: none;
   transition: all 0.2s ease;
+  color: var(--text-main);
 }
 .footer-icon-link:hover::after {
   opacity: 1;
@@ -686,14 +671,14 @@ body::before {
   <div class="hud-container">
     <div class="hud-meta-node">
       <div class="hud-pulse-tag">
-        <div class="hud-pulse-dot"></div>BATCH_LAUNCH
+        <div class="hud-pulse-dot"></div>LIVE_ENROLLMENT
       </div>
       <div class="hud-broadcast-string">
-        Official Kickoff: <span>Batch-050726 Starts Next Week!</span>
+        Allocation Update: <span>Batch-050726 Confirmed Options Closing Soon</span>
       </div>
     </div>
     <div class="hud-timer-mesh">
-      <div class="mesh-label">REGISTRATION WINDOW ACTIVE :</div>
+      <div class="mesh-label">REGISTRATION TIMELINE ACTIVE :</div>
       <div class="hud-clock-row">
         <div class="hud-cbox"><div class="hud-cbox-num" id="cd-d">00</div><div class="hud-cbox-lbl">Days</div></div>
         <div class="hud-cbox"><div class="hud-cbox-num" id="cd-h">00</div><div class="hud-cbox-lbl">Hrs</div></div>
@@ -714,7 +699,7 @@ body::before {
         <div class="brand-logo">code2career<span>_ai</span></div>
         <div class="brand-subtext">Guiding You Into Careers of the Future</div>
       </div>
-      <div class="badge"><div class="badge-dot"></div>Batch-050726 — Secure Your Entry Slot</div>
+      <div class="badge"><div class="badge-dot"></div>Batch-050726 — Active Seat Matrix</div>
     </div>
 
     <div class="header-hero-block">
@@ -722,7 +707,7 @@ body::before {
         <span class="gradient-span">AI CAREER STRATEGY</span> MASTERCLASS.
       </h1>
       <p class="main-summary">
-        Break through the noise. Secure your spot for <span>Batch-050726</span> launching next week. Master a comprehensive project roadmap, automated ATS clearing layouts, and industrial production architectures.
+        Break through the noise. Secure your placement link for <span>Batch-050726</span> launching next week. Master engineering project roadmaps, programmatic profiles, and micro-agent frameworks.
       </p>
     </div>
 
@@ -738,8 +723,8 @@ body::before {
       <div class="terminal-card">
         
         <div class="protocol-badge">
-          <span class="status-lbl">BATCH SEAT DEPLOYMENT // CORE VERIFIED</span>
-          <span class="status-main">BATCH-050726 REGISTRATION OPEN</span>
+          <span class="status-lbl">REGISTRATION VERIFIED // SECURE TUNNEL</span>
+          <span class="status-main">BATCH-050726 STATUS: ENROLLING</span>
         </div>
         
         <a href="https://code2careerai.com/contact" class="action-button">
@@ -747,9 +732,9 @@ body::before {
         </a>
         
         <div class="spec-info-grid">
-          <div class="spec-box"><label>BATCH ID</label><span>Batch-050726</span></div>
+          <div class="spec-box"><label>BATCH COHORT</label><span>Batch-050726</span></div>
           <div class="spec-box"><label>TIMELINE</label><span>Starts Next Week</span></div>
-          <div class="spec-box"><label>HOST HUB</label><span>code2career_ai</span></div>
+          <div class="spec-box"><label>HOST PLATFORM</label><span>code2career_ai</span></div>
           <div class="spec-box"><label>PREREQUISITE</label><span>Basic Code Literacy</span></div>
         </div>
 
