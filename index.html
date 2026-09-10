@@ -5,672 +5,1231 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-CXR5JD8BF9');</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Career Masterclass — code2career_ai</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Enterprise Multimodal PDF RAG & AI Engineer Masterclass — code2career_ai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
+  --bg-primary: #070A10;
+  --bg-surface: #0E1420;
+  --bg-surface-elevated: #131B2B;
+  --bg-surface-alt: #182337;
   --cyan: #00EDFF;
+  --cyan-dim: rgba(0, 237, 255, 0.1);
+  --cyan-glow: rgba(0, 237, 255, 0.28);
   --crimson: #FF1632;
-  --gold: #FFD700;
-  --dark-bg: #131A26;
-  --surface: #192231;
-  --border: rgba(0, 237, 255, 0.2);
+  --emerald: #10B981;
+  --whatsapp: #25D366;
+  --whatsapp-dim: rgba(37, 211, 102, 0.12);
+  --amber: #F59E0B;
   --text-main: #FFFFFF;
-  --text-muted: #BCC2CF;
-  --glow-cyan: rgba(0, 237, 255, 0.25);
-  --glow-crimson: rgba(255, 22, 50, 0.25);
+  --text-secondary: #CBD5E1;
+  --text-muted: #8292A8;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-card: rgba(255, 255, 255, 0.12);
+  --border-highlight: rgba(0, 237, 255, 0.35);
 }
+
 body{
-  background: var(--dark-bg);
-  color: var(--text-muted);
-  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
-  padding-top: 88px;
+  padding-top: 86px;
+  -webkit-font-smoothing: antialiased;
 }
+
 body::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at top center, rgba(0, 237, 255, 0.08), transparent 70%),
-              radial-gradient(circle at bottom left, rgba(255, 22, 50, 0.06), transparent 70%);
+  background: 
+    radial-gradient(circle at 50% -80px, rgba(0, 229, 255, 0.12), transparent 680px),
+    radial-gradient(circle at 85% 25%, rgba(255, 22, 50, 0.05), transparent 500px),
+    radial-gradient(circle at 10% 55%, rgba(0, 229, 255, 0.05), transparent 600px);
   pointer-events: none;
   z-index: 0;
 }
+
 .particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:hidden;}
-.particle{position:absolute;border-radius:50%;animation:float linear infinite;opacity:0.25;}
-@keyframes float{0%{transform:translateY(100vh);opacity:0;}10%{opacity:0.25;}90%{opacity:0.25;}100%{transform:translateY(-50px);opacity:0;}}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
-@keyframes slideUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+.particle{position:absolute;border-radius:50%;animation:float linear infinite;}
+@keyframes float{0%{transform:translateY(100vh);opacity:0;}15%{opacity:0.25;}85%{opacity:0.25;}100%{transform:translateY(-60px);opacity:0;}}
+@keyframes pulseDot{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(2.2);opacity:0;}}
 
-/* Brand Gradient Text Utility */
-.brand-gradient {
-  background: linear-gradient(90deg, var(--cyan) 0%, var(--crimson) 100%);
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text !important;
+.font-mono { font-family: 'JetBrains Mono', monospace; }
+.font-space { font-family: 'Space Grotesk', sans-serif; }
+
+.gradient-accent {
+  background: linear-gradient(120deg, var(--cyan) 0%, #38BDF8 60%, #818CF8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-/* Continuous Cyan-to-Crimson Glow Pulse */
-@keyframes dynamicGlowBlink {
-  0%, 100% {
-    transform: scale(1);
-    box-shadow: 0 8px 24px rgba(255, 22, 50, 0.35);
-    background: linear-gradient(135deg, var(--crimson) 0%, var(--cyan) 100%);
-  }
-  50% {
-    transform: scale(1.02);
-    box-shadow: 0 12px 32px rgba(0, 237, 255, 0.45);
-    background: linear-gradient(135deg, var(--cyan) 0%, var(--crimson) 100%);
-  }
-}
-
-/* TOP HUD HEADER BAR */
-.top-hud-panel {
+/* TOP STATUS BAR */
+.top-hud-bar {
   position: fixed;
-  top: 16px;
-  left: 16px;
-  right: 16px;
-  height: 64px;
-  background: rgba(25, 34, 49, 0.85);
-  border: 1px solid var(--border);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-radius: 16px;
+  top: 14px;
+  left: 14px;
+  right: 14px;
+  height: 60px;
+  background: rgba(14, 20, 32, 0.88);
+  border: 1px solid var(--border-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 14px;
   z-index: 1000;
   display: flex;
   align-items: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
 }
 .hud-container {
-  max-width: 1300px;
+  max-width: 1320px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.hud-meta-node {
+.hud-status-node {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
-.hud-pulse-tag {
+.live-pill {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: rgba(0, 237, 255, 0.1);
-  border: 1px solid rgba(0, 237, 255, 0.3);
+  gap: 7px;
+  background: var(--cyan-dim);
+  border: 1px solid var(--border-highlight);
   color: var(--cyan);
-  padding: 6px 14px;
+  padding: 5px 12px;
   border-radius: 999px;
-  font-family: 'Space Grotesk', sans-serif;
   font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 1px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
 }
-.hud-pulse-dot {
+.pulse-indicator {
   width: 6px;
   height: 6px;
   background: var(--cyan);
   border-radius: 50%;
   position: relative;
 }
-.hud-pulse-dot::after {
+.pulse-indicator::after {
   content: '';
   position: absolute;
   inset: 0;
   background: var(--cyan);
   border-radius: 50%;
-  animation: pulse 1.2s ease infinite;
-  transform: scale(2.5);
-  opacity: 0.4;
+  animation: pulseDot 1.4s ease-out infinite;
 }
-.hud-broadcast-string {
-  font-size: 12.5px;
-  color: var(--text-muted);
-  letter-spacing: 0.3px;
+.hud-broadcast {
+  font-size: 13px;
+  color: var(--text-secondary);
 }
-.hud-broadcast-string span {
-  color: var(--cyan);
-  font-weight: 700;
-}
-.hud-timer-mesh {
+.hud-broadcast strong { color: #FFFFFF; font-weight: 600; }
+.hud-broadcast span { color: var(--cyan); font-weight: 700; }
+
+.hud-timer-wrap {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
-.hud-timer-mesh .mesh-label {
+.timer-caption {
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--text-muted);
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
-.hud-clock-row {
+.clock-tiles {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
 }
-.hud-cbox {
-  background: var(--dark-bg);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 4px 10px;
-  min-width: 48px;
+.clock-tile {
+  background: #090E16;
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 3px 7px;
+  min-width: 42px;
   text-align: center;
 }
-.hud-cbox-num {
-  font-family: monospace;
-  font-size: 16px;
-  font-weight: 800;
+.clock-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  font-weight: 700;
   color: var(--cyan);
-  line-height: 1.1;
+  line-height: 1.15;
 }
-.hud-cbox-lbl {
-  font-size: 7.5px;
+.clock-lbl {
+  font-size: 7px;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
   font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
-/* MAIN CONTAINER STAGE */
+/* MAIN STAGE */
 .stage {
   position: relative;
   z-index: 10;
-  padding: 40px 24px;
+  padding: 36px 20px 50px;
 }
 .wrapper {
-  max-width: 1300px;
+  max-width: 1320px;
   width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 48px;
 }
 
-.brand-strip {
+/* BRAND HEADER STRIP */
+.brand-row {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: flex-end;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 24px;
-  animation: slideUp 0.5s ease;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 16px;
 }
-.brand-logo {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 26px;
+.brand-identity {
+  display: flex;
+  align-items: center;
+}
+
+/* 3D LOGO & BRAND STYLES */
+.c2c-brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  width: fit-content;
+}
+.c2c-logo-box-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  perspective: 1000px;
+}
+.c2c-logo-halo {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 237, 255, 0.3);
+  border-radius: 12px;
+  filter: blur(5px);
+  transition: all 0.3s ease;
+}
+.c2c-brand-link:hover .c2c-logo-halo {
+  background: rgba(0, 237, 255, 0.7);
+  transform: scale(1.12);
+}
+.c2c-logo-box {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  background: #131A26;
+  border: 1px solid rgba(0, 237, 255, 0.4);
+  border-radius: 9px;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  transition: transform 0.5s ease;
+  transform-style: preserve-3d;
+}
+.c2c-brand-link:hover .c2c-logo-box {
+  transform: rotateY(180deg);
+}
+.c2c-brand-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 4px rgba(0,237,255,0.8));
+}
+.c2c-brand-title {
   font-weight: 900;
-  letter-spacing: -0.5px;
-  color: var(--text-main);
-}
-.brand-logo span {
-  color: var(--crimson);
-}
-.brand-subtext {
-  font-size: 11px;
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  color: var(--text-muted);
-  letter-spacing: 1px;
+  font-size: 22px;
   text-transform: uppercase;
-  margin-top: 2px;
+  letter-spacing: 0.05em;
+  background: linear-gradient(90deg, #00EDFF 0%, #FFFFFF 50%, #FF1632 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Space Grotesk', sans-serif;
+  line-height: 1.1;
 }
-.badge {
+.c2c-brand-title span {
+  color: #FF1632;
+  -webkit-text-fill-color: #FF1632;
+}
+.brand-tag {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  margin-top: 3px;
+}
+
+.badge-stack {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.meta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 600;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+}
+.meta-badge.fresher {
+  background: var(--emerald-dim);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: var(--emerald);
+}
+.meta-badge.fee {
+  background: rgba(0, 237, 255, 0.12);
+  border-color: rgba(0, 237, 255, 0.35);
+  color: var(--cyan);
+  font-weight: 700;
+}
+
+/* HERO INTRO */
+.hero-block {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 980px;
+}
+.event-schedule-chip {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(0, 237, 255, 0.08);
-  border: 1px solid rgba(0, 237, 255, 0.3);
-  color: var(--cyan);
-  padding: 8px 18px;
-  border-radius: 999px;
+  width: fit-content;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-card);
+  padding: 6px 14px;
+  border-radius: 8px;
   font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 1px;
+  font-weight: 700;
+  color: var(--cyan);
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
-.badge-dot {
-  width: 6px;
-  height: 6px;
-  background: var(--cyan);
+.hero-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(32px, 4.4vw, 54px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -1.2px;
+  color: #FFFFFF;
+}
+.hero-description {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+.hero-description strong { color: #FFFFFF; }
+
+/* INSTRUCTOR HERO STRIP */
+.instructor-hero-strip {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-highlight);
+  padding: 10px 18px;
+  border-radius: 12px;
+  width: fit-content;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  flex-wrap: wrap;
+}
+.instructor-avatar-badge {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--cyan) 0%, #0099FF 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #070A10;
+  font-weight: 800;
+  font-size: 15px;
+  box-shadow: 0 0 12px rgba(0, 237, 255, 0.4);
+}
+.instructor-meta-text {
+  display: flex;
+  flex-direction: column;
+}
+.instructor-prefix {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+.instructor-fullname {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+.instructor-linkedin-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 119, 181, 0.15);
+  border: 1px solid rgba(0, 119, 181, 0.45);
+  color: #38BDF8 !important;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  margin-left: 8px;
+}
+.instructor-linkedin-link:hover {
+  background: #0077B5;
+  color: #FFFFFF !important;
+  border-color: #0077B5;
+}
+
+/* WORKBENCH & CHECKOUT */
+.workbench-grid {
+  display: grid;
+  grid-template-columns: 1.32fr 0.88fr;
+  gap: 32px;
+  align-items: stretch;
+}
+
+/* PLAYABLE VIDEO WINDOW */
+.video-workbench {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);
+  transition: border-color 0.3s ease;
+}
+.video-workbench:hover {
+  border-color: var(--border-highlight);
+}
+.workbench-titlebar {
+  background: #0B1019;
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.terminal-dots {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.dot {
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
 }
-
-.header-hero-block {
-  animation: slideUp 0.55s ease;
+.dot-red { background: #FF1632; }
+.dot-yellow { background: #F59E0B; }
+.dot-green { background: #00EDFF; }
+.workbench-filename {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  color: var(--cyan);
+  font-weight: 600;
 }
-.main-title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(38px, 5.5vw, 68px);
-  font-weight: 900;
-  line-height: 0.98;
-  letter-spacing: -2px;
-  margin-bottom: 12px;
-  color: var(--text-main);
-}
-.main-summary {
-  font-size: 16px;
-  color: var(--text-muted);
-  line-height: 1.6;
-  max-width: 740px;
-}
-.main-summary span {
-  color: var(--text-main);
-  font-weight: 700;
-}
-
-.top-media-showcase {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 48px;
-  align-items: stretch;
-  animation: slideUp 0.6s ease;
-}
-
-.video-module {
+.video-frame-container {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
   background: #000000;
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-}
-.video-module video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.95;
-}
-
-.terminal-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 36px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-}
-.protocol-badge {
-  background: rgba(0, 237, 255, 0.08);
-  border: 1px solid rgba(0, 237, 255, 0.25);
-  border-radius: 12px;
-  padding: 12px;
-  text-align: center;
-}
-.protocol-badge .status-lbl {
-  display: block;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  color: var(--cyan);
-  margin-bottom: 3px;
-  font-family: 'Space Grotesk', sans-serif;
-}
-.protocol-badge .status-main {
-  font-family: monospace;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--text-main);
-  letter-spacing: 0.5px;
-}
-
-/* Pulsing Brand Action Button */
-.action-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  color: #ffffff !important;
-  text-decoration: none;
-  padding: 18px 28px;
-  border-radius: 999px;
-  font-size: 16px;
-  font-weight: 800;
-  font-family: 'Space Grotesk', sans-serif;
-  transition: transform 0.2s ease-in-out;
-  animation: dynamicGlowBlink 3s infinite ease-in-out;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-.action-button:hover {
-  animation-play-state: paused;
-  transform: translateY(-2px) scale(1.02);
-}
-.action-button span {
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  font-size: 10px;
-  font-weight: 900;
-  padding: 3px 8px;
-  border-radius: 4px;
-}
-.spec-info-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-.spec-box {
-  background: var(--dark-bg);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 10px 14px;
-}
-.spec-box label {
-  display: block;
-  font-size: 8.5px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  color: var(--cyan);
-  margin-bottom: 2px;
-  text-transform: uppercase;
-}
-.spec-box span {
-  font-size: 13px;
-  color: var(--text-main);
-  font-weight: 600;
+  overflow: hidden;
 }
 
-/* MATRIX & MODULES */
-.bottom-content-matrix {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 56px;
-  align-items: start;
-  animation: slideUp 0.7s ease;
-  margin-top: 16px;
-}
-.curriculum-stack {
+/* REGISTRATION CARD */
+.checkout-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: 18px;
+  padding: 28px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  justify-content: space-between;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
 }
-.stack-title {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  color: var(--cyan);
-  text-transform: uppercase;
+.checkout-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #00EDFF 0%, #FFFFFF 50%, #FF1632 100%);
+}
+
+.registration-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 12px;
+}
+.cohort-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  background: var(--cyan-dim);
+  border: 1px solid rgba(0, 237, 255, 0.25);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+.seats-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #FF667A;
+}
+.live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #FF1632;
+  box-shadow: 0 0 8px #FF1632;
+}
+
+.card-main-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.35;
+  margin-bottom: 16px;
+  letter-spacing: -0.3px;
+}
+
+/* Mentor Quick-Card inside Checkout Card */
+.instructor-quick-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+}
+.iq-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.iq-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--cyan-dim);
+  border: 1px solid rgba(0, 237, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cyan);
+  font-size: 13px;
+}
+.iq-name {
+  font-size: 12.5px;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.2;
+}
+.iq-title {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+.iq-link {
+  color: #38BDF8;
+  font-size: 16px;
+  transition: transform 0.2s;
+}
+.iq-link:hover {
+  transform: scale(1.15);
+  color: #FFFFFF;
+}
+
+/* Clean Pricing Block */
+.pricing-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+.price-details {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.original-price {
+  font-size: 16px;
+  color: var(--text-muted);
+  text-decoration: line-through;
+  font-weight: 500;
+}
+.current-price {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 38px;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1;
+}
+.discount-pill {
+  font-size: 11px;
+  font-weight: 700;
+  color: #FFD2D8;
+  background: rgba(255, 22, 50, 0.18);
+  border: 1px solid rgba(255, 22, 50, 0.4);
+  padding: 4px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.3px;
+}
+
+/* Action Buttons */
+.cta-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.btn-pay-direct {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #00EDFF 0%, #0099FF 100%);
+  color: #060B13 !important;
+  text-decoration: none;
+  padding: 15px 20px;
+  border-radius: 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  box-shadow: 0 8px 24px rgba(0, 237, 255, 0.3);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+.btn-pay-direct:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 229, 255, 0.45);
+  background: linear-gradient(135deg, #26ECFF 0%, #1AABFF 100%);
+}
+
+.btn-contact-alt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid var(--border-card);
+  color: var(--text-secondary) !important;
+  text-decoration: none;
+  padding: 11px 16px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+.btn-contact-alt:hover {
+  border-color: var(--whatsapp);
+  color: var(--whatsapp) !important;
+  background: var(--whatsapp-dim);
+}
+
+.payment-trust-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 10px;
+  padding: 4px 0;
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+.payment-trust-row i { color: var(--emerald); }
+
+/* Human-Readable Details Grid */
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 16px;
+}
+.details-box {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.details-label {
+  display: block;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+.details-value {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+/* SECTION HEADINGS */
+.section-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.section-kicker {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--cyan);
   display: flex;
   align-items: center;
   gap: 8px;
 }
-.stack-title::before {
+.section-kicker::before {
   content: '';
-  width: 12px;
+  width: 14px;
   height: 2px;
   background: var(--cyan);
 }
-.module-layer {
-  position: relative;
-  padding: 20px 24px;
-  background: var(--surface);
-  border: 1px solid var(--border);
+.section-heading {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(26px, 3.2vw, 36px);
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.8px;
+}
+
+/* PROFESSIONAL CURRICULUM */
+.curriculum-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+.module-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
   border-radius: 16px;
-  transition: border-color 0.3s, transform 0.2s;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.25s ease-in-out;
+  position: relative;
 }
-.module-layer:hover {
-  border-color: var(--cyan);
-  transform: translateX(4px);
+.module-card:hover {
+  border-color: var(--border-highlight);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
 }
-.module-index {
-  font-family: 'Space Grotesk', sans-serif;
+.module-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.module-badge-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.module-num {
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--cyan);
-  margin-bottom: 4px;
+  background: var(--cyan-dim);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  padding: 4px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
 }
-.module-heading {
+.module-category {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.module-card.career .module-num {
+  color: var(--crimson);
+  background: var(--crimson-dim);
+  border-color: rgba(255, 22, 50, 0.3);
+}
+.module-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cyan);
+  font-size: 15px;
+}
+.module-card.career .module-icon {
+  color: var(--crimson);
+}
+.module-title {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--text-main);
-  margin-bottom: 6px;
+  font-size: 19px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 10px;
+  line-height: 1.35;
 }
-.module-body {
+.module-summary {
   font-size: 13.5px;
   color: var(--text-muted);
   line-height: 1.6;
+  margin-bottom: 16px;
+}
+.module-summary strong { color: #FFFFFF; }
+
+.module-deliverables {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-bottom: 20px;
+}
+.module-deliverables li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+.module-deliverables li i {
+  color: var(--emerald);
+  font-size: 12px;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+.module-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-subtle);
+}
+.module-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  padding: 3px 8px;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 5px;
+  color: var(--text-muted);
+}
+.module-card:hover .module-tag {
+  border-color: rgba(0, 229, 255, 0.25);
+  color: var(--cyan);
 }
 
-.showcase-block {
-  background: var(--surface);
-  border-left: 3px solid var(--cyan);
-  border-top: 1px solid var(--border);
-  border-right: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 24px;
-  border-radius: 0 16px 16px 0;
+/* ATTENDEE DELIVERABLES */
+.vault-panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: 20px;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 }
-.showcase-lbl {
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 1.5px;
+.vault-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.vault-card {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+.vault-card:hover {
+  border-color: var(--border-highlight);
+  transform: translateY(-3px);
+}
+.vault-icon-wrap {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: var(--cyan-dim);
+  border: 1px solid rgba(0, 237, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--cyan);
-  text-transform: uppercase;
-  margin-bottom: 6px;
+  font-size: 17px;
 }
-.showcase-desc {
-  font-size: 14px;
+.vault-card-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+.vault-card-desc {
+  font-size: 12.5px;
   color: var(--text-muted);
   line-height: 1.55;
 }
-.showcase-desc strong {
-  color: var(--text-main);
-}
 
-.terminal-instruction {
-  font-size: 12.5px;
-  color: var(--text-muted);
-  line-height: 1.5;
-  display: flex;
-  align-items: start;
-  gap: 12px;
-  background: var(--surface);
-  border: 1px solid rgba(0, 237, 255, 0.2);
-  padding: 16px 20px;
-  border-radius: 16px;
-}
-.terminal-instruction i {
-  color: var(--cyan);
-  margin-top: 2px;
-}
-.terminal-instruction strong {
-  color: var(--gold);
-  background: rgba(255, 215, 0, 0.1);
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-family: monospace;
-}
-
-/* FOOTER */
-.premium-footer {
-  margin-top: 80px;
-  border-top: 1px solid var(--border);
-  padding-top: 56px;
-  padding-bottom: 32px;
-  animation: slideUp 0.8s ease;
-}
-.footer-cta-panel {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 28px;
+/* PRE-FOOTER CTA CARD */
+.pre-footer-cta {
+  background: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-surface-elevated) 100%);
+  border: 1px solid var(--border-card);
+  border-radius: 20px;
   padding: 40px;
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
   gap: 40px;
   align-items: center;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
 }
-.footer-text-side .footer-badge {
+.pre-footer-text h2 {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 10px;
+  font-size: clamp(24px, 3.2vw, 34px);
   font-weight: 800;
-  letter-spacing: 2px;
-  color: var(--cyan);
-  text-transform: uppercase;
+  color: #FFFFFF;
+  letter-spacing: -0.6px;
   margin-bottom: 12px;
-  display: block;
 }
-.footer-text-side h2 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(28px, 4vw, 36px);
-  font-weight: 900;
-  color: var(--text-main);
-  letter-spacing: -1px;
-  margin-bottom: 16px;
-  line-height: 1.1;
-}
-.footer-text-side p {
+.pre-footer-text p {
   font-size: 14.5px;
   color: var(--text-muted);
   line-height: 1.6;
 }
-.footer-text-side p span {
-  color: var(--text-main);
-  font-weight: 700;
-}
-.footer-action-side {
+.pre-footer-actions {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
-
-.footer-cta-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  color: #ffffff !important;
-  text-decoration: none;
-  padding: 18px 28px;
-  border-radius: 999px;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 15px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  transition: all 0.3s ease;
-  animation: dynamicGlowBlink 3s infinite ease-in-out;
-  animation-delay: 0.6s;
-}
-.footer-cta-btn:hover {
-  animation-play-state: paused;
-  transform: translateY(-2px);
-}
-.footer-meta-bullets {
+.pre-footer-notes {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding-left: 4px;
+  padding-left: 2px;
 }
-.footer-bullet {
+.pre-footer-note {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 11.5px;
-  color: var(--text-muted);
-}
-.footer-bullet i {
-  font-size: 10px;
-  color: var(--cyan);
-}
-
-.footer-ecosystem-bar {
-  margin-top: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-top: 1px solid var(--border);
-  padding-top: 28px;
-}
-.footer-copyright {
   font-size: 12px;
   color: var(--text-muted);
-  font-family: monospace;
 }
-.footer-icon-row {
+.pre-footer-note i {
+  color: var(--cyan);
+  font-size: 11px;
+}
+
+/* ==========================================================================
+   OFFICIAL REACT-STYLE ELEGANT FOOTER (Single Column Balanced Layout)
+   ========================================================================== */
+.c2c-official-footer {
+  position: relative;
+  background-color: #0E1420;
+  border-top: 1px solid rgba(0, 237, 255, 0.2);
+  padding: 48px 24px 32px;
+  overflow: hidden;
+  text-align: left;
+  margin-top: 60px;
+  z-index: 20;
+}
+.c2c-circuit-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  mix-blend-mode: screen;
+  background-image: url('/circuit_image.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+.c2c-glow-left {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  width: 320px;
+  height: 320px;
+  background: rgba(0, 237, 255, 0.15);
+  border-radius: 9999px;
+  filter: blur(48px);
+  pointer-events: none;
+  z-index: 0;
+}
+.c2c-glow-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  width: 320px;
+  height: 320px;
+  background: rgba(255, 22, 50, 0.15);
+  border-radius: 9999px;
+  filter: blur(48px);
+  pointer-events: none;
+  z-index: 0;
+}
+.c2c-footer-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.c2c-footer-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: start;
+}
+.c2c-footer-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 640px;
+}
+.c2c-footer-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 280px;
+}
+
+.c2c-footer-bio {
+  font-size: 12.5px;
+  color: rgba(188, 194, 207, 0.85);
+  line-height: 1.6;
+}
+
+.c2c-footer-socials {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
+  padding-top: 4px;
 }
-.footer-icon-link {
-  width: 42px;
-  height: 42px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 50%;
-  display: flex;
+.c2c-footer-sbtn {
+  padding: 8px;
+  border-radius: 8px;
+  background: #131A26;
+  border: 1px solid rgba(0, 237, 255, 0.2);
+  color: #BCC2CF;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
-  color: var(--text-muted);
   text-decoration: none;
-  transition: all 0.25s ease;
+  font-size: 15px;
+  width: 36px;
+  height: 36px;
+  transition: all 0.2s ease;
 }
-.footer-icon-link:hover {
-  color: var(--cyan);
-  border-color: var(--cyan);
+.c2c-footer-sbtn:hover {
+  border-color: #00EDFF;
+  color: #00EDFF;
   transform: translateY(-2px);
 }
 
-/* FLOATING GENIE OVERLAY WIDGET */
+.c2c-footer-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  background: #131A26;
+  border: 1px solid rgba(0, 237, 255, 0.3);
+  font-size: 9.5px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  color: #00EDFF;
+  width: fit-content;
+}
+.c2c-footer-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #00EDFF;
+  animation: pulseDot 1.4s infinite;
+}
+
+.c2c-footer-section-title {
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #00EDFF;
+}
+
+.c2c-footer-connect-box {
+  background: #131A26;
+  border: 1px solid rgba(0, 237, 255, 0.3);
+  padding: 14px 16px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+.c2c-footer-connect-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12.5px;
+  color: #00EDFF;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.c2c-footer-connect-link:hover {
+  color: #FFFFFF;
+}
+.c2c-footer-connect-link i {
+  color: #00EDFF;
+  font-size: 13px;
+  width: 16px;
+  flex-shrink: 0;
+}
+.c2c-footer-connect-link.whatsapp {
+  color: var(--whatsapp);
+}
+.c2c-footer-connect-link.whatsapp i {
+  color: var(--whatsapp);
+}
+
+.c2c-footer-bottom-row {
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.c2c-footer-copy {
+  color: rgba(188, 194, 207, 0.6);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.c2c-footer-tagline {
+  color: rgba(188, 194, 207, 0.8);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* FLOATING RAZORPAY GENIE OVERLAY */
 .genie-overlay {
   position: fixed;
-  bottom: 24px;
-  left: 24px;
+  bottom: 22px;
+  left: 22px;
   z-index: 99999;
-  font-family: 'Inter', sans-serif;
 }
 .genie-card {
   position: relative;
-  width: 330px;
-  background: radial-gradient(circle at top left, rgba(0, 237, 255, 0.15), transparent 65%),
-              radial-gradient(circle at bottom right, rgba(255, 22, 50, 0.12), transparent 65%),
-              #192231;
-  border: 1px solid rgba(0, 237, 255, 0.35);
-  border-radius: 20px;
-  padding: 18px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 237, 255, 0.15);
-  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  width: 320px;
+  background: rgba(13, 19, 31, 0.94);
+  border: 1px solid var(--border-highlight);
+  border-radius: 16px;
+  padding: 16px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.75);
+  animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-.genie-head {
+.genie-top-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 8px;
 }
-.genie-chip {
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 1px;
+.genie-badge {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
   color: var(--cyan);
-  background: rgba(0, 237, 255, 0.1);
-  border: 1px solid rgba(0, 237, 255, 0.25);
+  background: var(--cyan-dim);
+  border: 1px solid rgba(0, 237, 255, 0.3);
   padding: 3px 8px;
-  border-radius: 999px;
+  border-radius: 5px;
 }
-.genie-btn {
+.genie-close-btn {
   background: transparent;
   border: none;
   color: var(--text-muted);
   cursor: pointer;
-  font-size: 14px;
+  font-size: 13px;
+  padding: 2px;
 }
-.genie-btn:hover { color: var(--crimson); }
+.genie-close-btn:hover { color: #FFFFFF; }
 .genie-title {
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 700;
   color: #FFFFFF;
   margin-bottom: 4px;
 }
@@ -680,324 +1239,636 @@ body::before {
   margin-bottom: 12px;
   line-height: 1.4;
 }
-.genie-timer-row {
+.genie-timer-strip {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--dark-bg);
-  border: 1px solid var(--border);
-  padding: 6px 12px;
-  border-radius: 10px;
+  background: #090E16;
+  border: 1px solid var(--border-subtle);
+  padding: 6px 10px;
+  border-radius: 8px;
   margin-bottom: 12px;
 }
 .genie-timer-lbl {
-  font-size: 10px;
-  font-weight: 800;
+  font-size: 9.5px;
+  font-weight: 700;
   text-transform: uppercase;
   color: var(--text-muted);
 }
-.genie-timer-val {
-  font-family: monospace;
-  font-size: 13px;
-  font-weight: 800;
-  color: var(--gold);
+.genie-timer-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--cyan);
 }
-.genie-cta {
+.genie-pay-btn {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 6px;
-  width: 100%;
-  padding: 10px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, var(--crimson) 0%, var(--cyan) 100%);
-  color: #FFFFFF !important;
-  font-size: 11px;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #00EDFF 0%, #0099FF 100%);
+  color: #060B13 !important;
+  font-size: 12px;
   font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.3px;
   text-decoration: none;
-  box-shadow: 0 4px 15px rgba(255, 22, 50, 0.3);
+  box-shadow: 0 4px 14px rgba(0, 229, 255, 0.3);
+  transition: transform 0.15s ease;
+}
+.genie-pay-btn:hover {
+  transform: translateY(-1px);
+}
+.genie-pay-tag {
+  background: rgba(6, 11, 19, 0.25);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
 }
 
-.genie-min-pill {
+.genie-min-bubble {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-highlight);
   border-radius: 999px;
   padding: 8px 16px;
   cursor: pointer;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
 }
-.genie-min-text { color: #FFFFFF; font-size: 12px; font-weight: 800; }
-.genie-min-badge { color: var(--cyan); font-size: 11px; font-weight: 800; font-family: monospace; }
+.genie-min-text { color: #FFFFFF; font-size: 12px; font-weight: 700; }
+.genie-min-badge { color: var(--cyan); font-size: 11px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
 
 @media(max-width:992px) {
-  body { padding-top: 104px; }
-  .top-hud-panel { height: auto; padding: 12px 0; top: 0; left: 0; right: 0; border-radius: 0; border-width: 0 0 1px 0; }
-  .hud-container { flex-direction: column; gap: 12px; }
-  .top-media-showcase, .bottom-content-matrix { grid-template-columns: 1fr; gap: 32px; }
-  .brand-strip { flex-direction: column; align-items: flex-start; gap: 8px; }
-  .footer-cta-panel { grid-template-columns: 1fr; gap: 32px; padding: 32px; }
-  .footer-ecosystem-bar { flex-direction: column; gap: 20px; text-align: center; }
+  body { padding-top: 106px; }
+  .top-hud-bar { height: auto; padding: 10px 0; top: 0; left: 0; right: 0; border-radius: 0; border-width: 0 0 1px 0; }
+  .hud-container { flex-direction: column; gap: 8px; }
+  .workbench-grid { grid-template-columns: 1fr; gap: 24px; }
+  .curriculum-grid { grid-template-columns: 1fr; }
+  .vault-grid { grid-template-columns: 1fr 1fr; }
+  .pre-footer-cta { grid-template-columns: 1fr; gap: 28px; padding: 28px; }
+  .c2c-footer-layout-grid { grid-template-columns: 1fr; gap: 24px; }
+}
+@media(max-width:600px) {
+  .vault-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 <body>
 
-<div class="top-hud-panel">
+<!-- TOP STATUS BAR -->
+<header class="top-hud-bar">
   <div class="hud-container">
-    <div class="hud-meta-node">
-      <div class="hud-pulse-tag">
-        <div class="hud-pulse-dot"></div>BATCH_LAUNCH
+    <div class="hud-status-node">
+      <div class="live-pill">
+        <div class="pulse-indicator"></div>LIVE MASTERCLASS
       </div>
-      <div class="hud-broadcast-string">
-        Official Kickoff: <span>Batch-050726 Starts Next Week!</span>
+      <div class="hud-broadcast">
+        Tuesday, 22-Sep-2026: <strong>Enterprise PDF RAG + AI Engineer Career Prep</strong> | <span>Pass: ₹299/-</span>
       </div>
     </div>
-    <div class="hud-timer-mesh">
-      <div class="mesh-label">REGISTRATION WINDOW ACTIVE :</div>
-      <div class="hud-clock-row">
-        <div class="hud-cbox"><div class="hud-cbox-num" id="cd-d">00</div><div class="hud-cbox-lbl">Days</div></div>
-        <div class="hud-cbox"><div class="hud-cbox-num" id="cd-h">00</div><div class="hud-cbox-lbl">Hrs</div></div>
-        <div class="hud-cbox"><div class="hud-cbox-num" id="cd-m">00</div><div class="hud-cbox-lbl">Min</div></div>
-        <div class="hud-cbox"><div class="hud-cbox-num" id="cd-s">00</div><div class="hud-cbox-lbl">Sec</div></div>
+    <div class="hud-timer-wrap">
+      <div class="timer-caption">Registration Closes In:</div>
+      <div class="clock-tiles">
+        <div class="clock-tile"><div class="clock-val" id="cd-d">00</div><div class="clock-lbl">Days</div></div>
+        <div class="clock-tile"><div class="clock-val" id="cd-h">00</div><div class="clock-lbl">Hrs</div></div>
+        <div class="clock-tile"><div class="clock-val" id="cd-m">00</div><div class="clock-lbl">Min</div></div>
+        <div class="clock-tile"><div class="clock-val" id="cd-s">00</div><div class="clock-lbl">Sec</div></div>
       </div>
     </div>
   </div>
-</div>
+</header>
 
 <div class="particles" id="particles"></div>
 
-<section class="stage">
+<main class="stage">
   <div class="wrapper">
     
-    <div class="brand-strip">
-      <div>
-        <div class="brand-logo">code2career<span>_ai</span></div>
-        <div class="brand-subtext">Guiding You Into Careers of the Future</div>
+    <!-- BRAND STRIP WITH INTERACTIVE 3D LOGO -->
+    <div class="brand-row">
+      <div class="brand-identity">
+        <a href="/" class="c2c-brand-link">
+          <div class="c2c-logo-box-wrapper">
+            <div class="c2c-logo-halo"></div>
+            <div class="c2c-logo-box">
+              <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="c2c-brand-svg">
+                <defs>
+                  <linearGradient id="brandGradHeader" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#00EDFF" />
+                    <stop offset="50%" stop-color="#FFFFFF" />
+                    <stop offset="100%" stop-color="#FF1632" />
+                  </linearGradient>
+                </defs>
+                <path d="M 38 28 L 18 50 L 38 72" stroke="url(#brandGradHeader)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M 58 24 L 42 76" stroke="#FF1632" stroke-width="9" stroke-linecap="round" />
+                <path d="M 62 28 L 82 50 L 62 72" stroke="url(#brandGradHeader)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column;">
+            <span class="c2c-brand-title">
+              code2career<span>_ai</span>
+            </span>
+            <span class="brand-tag">Guiding You Into Careers of the Future</span>
+          </div>
+        </a>
       </div>
-      <div class="badge"><div class="badge-dot"></div>Batch-050726 — Secure Your Entry Slot</div>
+      
+      <div class="badge-stack">
+        <div class="meta-badge fresher"><i class="fas fa-check-circle"></i> Tailored for Freshers &amp; Early Engineers</div>
+        <div class="meta-badge"><i class="fas fa-calendar"></i> Tuesday • 22 Sept 2026</div>
+        <div class="meta-badge fee"><i class="fas fa-bolt"></i> Registration Pass: ₹299</div>
+      </div>
     </div>
 
-    <div class="header-hero-block">
-      <h1 class="main-title">
-        <span class="brand-gradient">AI CAREER STRATEGY</span> MASTERCLASS.
+    <!-- HERO INTRODUCTION -->
+    <section class="hero-block">
+      <div class="event-schedule-chip">
+        <i class="fas fa-clock"></i> Tuesday, 22 September 2026 • 8:00 PM – 10:30 PM IST
+      </div>
+      <h1 class="hero-title">
+        Build a Real <span class="gradient-accent">Enterprise Multimodal PDF RAG</span> Pipeline.
       </h1>
-      <p class="main-summary">
-        Break through the noise. Secure your spot for <span>Batch-050726</span> launching next week. Master a comprehensive project roadmap, automated ATS clearing layouts, and industrial production architectures.
+      <p class="hero-description">
+        95% of freshers rely on basic text chunkers that break the moment a PDF contains complex tables, multi-column layouts, or charts. In this 2.5-hour hands-on masterclass, you will build a <strong>real Azure PDF ingestion &amp; search pipeline</strong>, take home the complete <strong>runnable Python code</strong>, and learn the exact step-by-step strategy to <strong>land your first AI Engineer job</strong>.
+      </p>
+
+      <!-- INSTRUCTOR HERO STRIP -->
+      <div class="instructor-hero-strip">
+        <div class="instructor-avatar-badge">
+          <i class="fas fa-user-tie"></i>
+        </div>
+        <div class="instructor-meta-text">
+          <span class="instructor-prefix">Masterclass Mentor</span>
+          <div class="instructor-fullname">
+            Learn from Enterprise AI Architect: <strong>Rajesh Kumar</strong>
+          </div>
+        </div>
+        <a href="https://www.linkedin.com/company/code2careerai/" target="_blank" rel="noopener noreferrer" class="instructor-linkedin-link">
+          <i class="fab fa-linkedin"></i> LinkedIn Company Page
+        </a>
+      </div>
+    </section>
+
+    <!-- WORKBENCH & CHECKOUT -->
+    <section class="workbench-grid">
+      
+      <!-- PLAYABLE VIDEO WINDOW (GITHUB PUBLIC WORKSHOP.MP4) -->
+      <div class="video-workbench">
+        <div class="workbench-titlebar">
+          <div class="terminal-dots">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+          </div>
+          <div class="workbench-filename">workshop.mp4</div>
+        </div>
+        <div class="video-frame-container">
+          <video 
+            controls 
+            autoplay 
+            muted 
+            loop 
+            playsinline 
+            preload="metadata" 
+            poster="workshop/videos/poster-placeholder.jpg"
+            style="width: 100%; height: 100%; object-fit: cover; display: block;"
+          >
+            <source src="workshop.mp4" type="video/mp4">
+            Your browser does not support the video tag execution layer.
+          </video>
+        </div>
+      </div>
+
+      <!-- REGISTRATION CARD -->
+      <div class="checkout-card">
+        <div>
+          <div class="registration-header">
+            <span class="cohort-badge">Live Interactive Cohort</span>
+            <span class="seats-status">
+              <span class="live-dot"></span> Limited Seats Available
+            </span>
+          </div>
+
+          <h2 class="card-main-title">Live Masterclass Pass + Full Code Repo + Career Strategy</h2>
+
+          <!-- Mentor Quick-Card inside Checkout Card -->
+          <div class="instructor-quick-box">
+            <div class="iq-left">
+              <div class="iq-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+              <div>
+                <div class="iq-name">Rajesh Kumar</div>
+                <div class="iq-title">Enterprise AI Architect &amp; Mentor</div>
+              </div>
+            </div>
+            <a href="https://www.linkedin.com/company/code2careerai/" target="_blank" rel="noopener noreferrer" class="iq-link" title="LinkedIn Company">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </div>
+          
+          <div class="pricing-block">
+            <div class="price-details">
+              <span class="original-price">₹2,499</span>
+              <span class="current-price">₹299</span>
+            </div>
+            <span class="discount-pill">Save 88% (Early Bird)</span>
+          </div>
+
+          <!-- Direct Payment & WhatsApp Touchpoint -->
+          <div class="cta-stack">
+            <a href="https://rzp.io/rzp/rl7Qnq2" class="btn-pay-direct" target="_blank" rel="noopener noreferrer">
+              <span>Pay ₹299 &amp; Secure Your Seat</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+
+            <a href="https://wa.me/919596858924?text=Hi%2C%20I%20have%20a%20query%20regarding%20the%20AI%20Engineer%20Masterclass" class="btn-contact-alt" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-whatsapp" style="color: var(--whatsapp); font-size: 15px;"></i>
+              <span>Have Questions? Connect on WhatsApp</span>
+            </a>
+          </div>
+
+          <div class="payment-trust-row">
+            <span><i class="fas fa-shield-alt"></i> Razorpay Verified</span>
+            <span>•</span>
+            <span>UPI / Cards / NetBanking</span>
+            <span>•</span>
+            <span>Instant Confirmation</span>
+          </div>
+        </div>
+
+        <!-- Human-Readable Session Details -->
+        <div class="details-grid">
+          <div class="details-box">
+            <span class="details-label">Date</span>
+            <span class="details-value">22-Sep-2026 (Tue)</span>
+          </div>
+          <div class="details-box">
+            <span class="details-label">Time</span>
+            <span class="details-value">8:00 PM – 10:30 PM IST</span>
+          </div>
+          <div class="details-box">
+            <span class="details-label">Includes</span>
+            <span class="details-value">Code + Slides + Video</span>
+          </div>
+          <div class="details-box">
+            <span class="details-label">Target Audience</span>
+            <span class="details-value">Freshers &amp; Developers</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- PROFESSIONAL CURRICULUM -->
+    <section>
+      <div class="section-meta" style="margin-bottom: 24px;">
+        <div class="section-kicker">Technical Curriculum</div>
+        <h2 class="section-heading">What You Will Build &amp; Master Live</h2>
+      </div>
+
+      <div class="curriculum-grid">
+        
+        <!-- Module 1 -->
+        <div class="module-card">
+          <div>
+            <div class="module-header">
+              <div class="module-badge-group">
+                <span class="module-num">Module 01</span>
+                <span class="module-category">Data Engineering</span>
+              </div>
+              <div class="module-icon"><i class="fas fa-file-invoice"></i></div>
+            </div>
+            <h3 class="module-title">Layout-Aware PDF Ingestion &amp; Atomic Table Extraction</h3>
+            <p class="module-summary">
+              Why blind chunkers destroy financial statements, balance sheets, and multi-column reports. Discover how to preserve intricate structures using <strong>Azure AI Document Intelligence</strong>.
+            </p>
+            <ul class="module-deliverables">
+              <li><i class="fas fa-check-circle"></i> <span>Execute <strong>prebuilt-layout</strong> to extract GitHub-flavored Markdown.</span></li>
+              <li><i class="fas fa-check-circle"></i> <span>Preserve table cell boundaries and multi-column reading orders atomically.</span></li>
+              <li><i class="fas fa-check-circle"></i> <span>Isolate diagrams, flowcharts, and embedded figures automatically.</span></li>
+            </ul>
+          </div>
+          <div class="module-tags">
+            <span class="module-tag">Azure Document Intelligence</span>
+            <span class="module-tag">Markdown Extraction</span>
+            <span class="module-tag">Table Preservation</span>
+          </div>
+        </div>
+
+        <!-- Module 2 -->
+        <div class="module-card">
+          <div>
+            <div class="module-header">
+              <div class="module-badge-group">
+                <span class="module-num">Module 02</span>
+                <span class="module-category">Multimodal Search</span>
+              </div>
+              <div class="module-icon"><i class="fas fa-network-wired"></i></div>
+            </div>
+            <h3 class="module-title">Multimodal Chart Summarization &amp; Hybrid Azure AI Search</h3>
+            <p class="module-summary">
+              Solve the critical limitation of text-only search when data is locked inside diagrams. Build a hybrid search index combining <strong>GPT-4o Vision</strong> with lexical and vector retrieval.
+            </p>
+            <ul class="module-deliverables">
+              <li><i class="fas fa-check-circle"></i> <span>Generate contextual chart summaries via <strong>Azure OpenAI GPT-4o Vision</strong>.</span></li>
+              <li><i class="fas fa-check-circle"></i> <span>Create high-dimensional dense embeddings with <strong>text-embedding-3-large</strong>.</span></li>
+              <li><i class="fas fa-check-circle"></i> <span>Fuse BM25 keyword matching with dense HNSW vector search using <strong>RRF</strong>.</span></li>
+              <li><i class="fas fa-check-circle"></i> <span>Apply Azure L2 Semantic Rerankers to maximize answer relevance.</span></li>
+            </ul>
+          </div>
+          <div class="module-tags">
+            <span class="module-tag">GPT-4o Vision</span>
+            <span class="module-tag">HNSW Vector Index</span>
+            <span class="module-tag">BM25 + RRF</span>
+            <span class="module-tag">Semantic Reranker</span>
+          </div>
+        </div>
+
+        <!-- Module 3 -->
+        <div class="module-card">
+          <div>
+            <div class="module-header">
+              <div class="module-badge-group">
+                <span class="module-num">Module 03</span>
+                <span class="module-category">Code Architecture</span>
+              </div>
+              <div class="module-icon"><i class="fab fa-github"></i></div>
+            </div>
+            <h3 class="module-title">Production-Ready Python Codebase &amp; Pipeline Walkthrough</h3>
+            <p class="module-summary">
+              Transition from messy Jupyter notebooks to a clean, modular Python repository built with production patterns, async execution, and error resilience.
+            </p>
+            <ul class="module-deliverables">
+              <li><i class="fas fa-check-circle"></i> <span>Inspect asynchronous document chunkers with section lineage prepending.</span></li>
+              <li><i class="fas fa-check-circle"></i> <span>Implement fault-tolerant ingestion loops with rate-limiting &amp; retries.</span></li>
+              <li><i class="fas fa-check-circle"></i> <span>Ready-to-deploy index schemas configured for Azure AI Search clients.</span></li>
+            </ul>
+          </div>
+          <div class="module-tags">
+            <span class="module-tag">Python 3.11+</span>
+            <span class="module-tag">Async Pipelines</span>
+            <span class="module-tag">Modular GitHub Repo</span>
+          </div>
+        </div>
+
+        <!-- Module 4 -->
+        <div class="module-card career">
+          <div>
+            <div class="module-header">
+              <div class="module-badge-group">
+                <span class="module-num">Module 04</span>
+                <span class="module-category">Career Strategy</span>
+              </div>
+              <div class="module-icon"><i class="fas fa-briefcase"></i></div>
+            </div>
+            <h3 class="module-title">How to Get Hired as an AI Engineer: Fresher Job Playbook</h3>
+            <p class="module-summary">
+              Direct, tactical guidance on turning this exact project into real job offers. Learn how to present yourself so engineering managers see you as an immediate hire.
+            </p>
+            <ul class="module-deliverables">
+              <li><i class="fas fa-check-circle"></i> <span>How to frame this project on your resume so it easily clears recruiter screening.</span></li>
+              <li><i class="fas fa-check-circle"></i> <span>How to talk through real design choices (chunking, hybrid search, rerankers) in interviews.</span></li>
+              <li><i class="fas fa-check-circle"></i> <span>The exact portfolio setup and GitHub presentation that proves you can build real software.</span></li>
+            </ul>
+          </div>
+          <div class="module-tags">
+            <span class="module-tag">Resume Positioning</span>
+            <span class="module-tag">Interview Strategy</span>
+            <span class="module-tag">Job Search Playbook</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ATTENDEE DELIVERABLES VAULT -->
+    <section class="vault-panel">
+      <div class="section-meta">
+        <div class="section-kicker">Direct Attendee Artifacts</div>
+        <h2 class="section-heading">Everything Included with Your ₹299 Pass</h2>
+      </div>
+
+      <div class="vault-grid">
+        <div class="vault-card">
+          <div class="vault-icon-wrap"><i class="fab fa-github"></i></div>
+          <div class="vault-card-title">Production Code Repo</div>
+          <p class="vault-card-desc">Fully documented, modular Python repository with async Azure Document Intelligence parser &amp; vector search scripts.</p>
+        </div>
+
+        <div class="vault-card">
+          <div class="vault-icon-wrap"><i class="fas fa-project-diagram"></i></div>
+          <div class="vault-card-title">System Architecture Blueprint</div>
+          <p class="vault-card-desc">Clean pipeline flowcharts and diagrams ready to embed into your personal portfolio website and interview presentations.</p>
+        </div>
+
+        <div class="vault-card">
+          <div class="vault-icon-wrap"><i class="fas fa-user-graduate"></i></div>
+          <div class="vault-card-title">Fresher Job Strategy Guide</div>
+          <p class="vault-card-desc">Step-by-step blueprint on showcasing this pipeline on your resume, reaching out to hiring managers, and clearing technical rounds.</p>
+        </div>
+
+        <div class="vault-card">
+          <div class="vault-icon-wrap"><i class="fas fa-video"></i></div>
+          <div class="vault-card-title">Full HD Recording &amp; Q&amp;A</div>
+          <p class="vault-card-desc">Lifetime access to the complete session recording, presentation slides, and post-session community support.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRE-FOOTER CTA CARD -->
+    <section class="pre-footer-cta">
+      <div class="pre-footer-text">
+        <span style="font-size: 11px; font-weight: 700; color: var(--cyan); letter-spacing: 1.5px; text-transform: uppercase;">Live Cohort Registration</span>
+        <h2>Ready to upgrade your AI engineering profile?</h2>
+        <p>Join us this <span>Tuesday, 22 September 2026 at 8:00 PM IST</span>. Learn directly from Enterprise AI Architect <strong>Rajesh Kumar</strong> and start constructing software that hiring managers respect.</p>
+      </div>
+
+      <div class="pre-footer-actions">
+        <a href="https://rzp.io/rzp/rl7Qnq2" class="btn-pay-direct" target="_blank" rel="noopener noreferrer">
+          <span>Register for ₹299 via Razorpay</span>
+          <i class="fas fa-arrow-right"></i>
+        </a>
+        <div class="pre-footer-notes">
+          <div class="pre-footer-note"><i class="fas fa-check"></i> Tuesday, 22-Sep-2026 • 8:00 PM IST</div>
+          <div class="pre-footer-note"><i class="fas fa-check"></i> Complete GitHub Repository + Fresher Job Strategy Included</div>
+          <div class="pre-footer-note"><i class="fas fa-check"></i> Instant Seat Confirmation via Razorpay</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- ==========================================================================
+     EXACT MATCH REACT-STYLE PROFESSIONAL FOOTER (Zero Repetition)
+     ========================================================================== -->
+<footer class="c2c-official-footer">
+  <div class="c2c-circuit-bg"></div>
+  <div class="c2c-glow-left"></div>
+  <div class="c2c-glow-right"></div>
+
+  <div class="c2c-footer-container">
+    
+    <div class="c2c-footer-layout-grid">
+      
+      <!-- LEFT COLUMN: BRAND & BIO -->
+      <div class="c2c-footer-left-col">
+        <a href="/" class="c2c-brand-link">
+          <div class="c2c-logo-box-wrapper">
+            <div class="c2c-logo-halo"></div>
+            <div class="c2c-logo-box">
+              <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="c2c-brand-svg">
+                <defs>
+                  <linearGradient id="brandGradFooter" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#00EDFF" />
+                    <stop offset="50%" stop-color="#FFFFFF" />
+                    <stop offset="100%" stop-color="#FF1632" />
+                  </linearGradient>
+                </defs>
+                <path d="M 38 28 L 18 50 L 38 72" stroke="url(#brandGradFooter)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M 58 24 L 42 76" stroke="#FF1632" stroke-width="9" stroke-linecap="round" />
+                <path d="M 62 28 L 82 50 L 62 72" stroke="url(#brandGradFooter)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+          </div>
+          <span class="c2c-brand-title">
+            code2career<span>_ai</span>
+          </span>
+        </a>
+
+        <p class="c2c-footer-bio">
+          Bridging the gap between learning to code and building production-grade AI systems. Acquire verified portfolio projects, step-by-step masterclasses, and real-world interview blueprints .
+        </p>
+
+        <div class="c2c-footer-socials">
+          <a href="https://www.instagram.com/code2career_ai/" target="_blank" rel="noopener noreferrer" class="c2c-footer-sbtn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@Code2Career_AI" target="_blank" rel="noopener noreferrer" class="c2c-footer-sbtn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.linkedin.com/company/code2careerai/" target="_blank" rel="noopener noreferrer" class="c2c-footer-sbtn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+
+        <div class="c2c-footer-status-badge">
+          <span class="c2c-footer-status-dot"></span>
+          <span>SYSTEM MATRIX ONLINE · ALL HUBS ACTIVE</span>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: CONNECT DESK -->
+      <div class="c2c-footer-right-col">
+        <div class="c2c-footer-section-title">Connect Desk</div>
+        
+        <div class="c2c-footer-connect-box">
+          <a href="https://wa.me/919596858924?text=Hi%2C%20I%20have%20a%20query%20regarding%20the%20AI%20Engineer%20Masterclass" target="_blank" rel="noopener noreferrer" class="c2c-footer-connect-link whatsapp">
+            <i class="fab fa-whatsapp"></i>
+            <span>+91 9596858924</span>
+          </a>
+
+          <a href="mailto:contact@code2careerai.com" class="c2c-footer-connect-link">
+            <i class="fas fa-envelope"></i>
+            <span class="truncate">contact@code2careerai.com</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BOTTOM ROW -->
+    <div class="c2c-footer-bottom-row">
+      <p class="c2c-footer-copy">
+        &copy; 2026 CODE2CAREER_AI. ALL RIGHTS RESERVED
+      </p>
+      <p class="c2c-footer-tagline">
+        Guiding You Into Careers of the Future
       </p>
     </div>
 
-    <div class="top-media-showcase">
-      
-      <div class="video-module">
-        <video controls preload="metadata" poster="workshop/videos/poster-placeholder.jpg">
-          <source src="workshop/videos/20092026.mp4" type="video/mp4">
-          Your browser does not support the video tag execution layer.
-        </video>
-      </div>
-
-      <div class="terminal-card">
-        
-        <div class="protocol-badge">
-          <span class="status-lbl">BATCH SEAT DEPLOYMENT // CORE VERIFIED</span>
-          <span class="status-main">BATCH-050726 REGISTRATION OPEN</span>
-        </div>
-        
-        <a href="https://code2careerai.com/contact" class="action-button">
-          Secure Your Entry Slot <span>LIVE</span>
-        </a>
-        
-        <div class="spec-info-grid">
-          <div class="spec-box"><label>BATCH ID</label><span>Batch-050726</span></div>
-          <div class="spec-box"><label>TIMELINE</label><span>Starts Next Week</span></div>
-          <div class="spec-box"><label>HOST HUB</label><span>code2career_ai</span></div>
-          <div class="spec-box"><label>PREREQUISITE</label><span>Basic Code Literacy</span></div>
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="bottom-content-matrix">
-      
-      <div class="curriculum-stack">
-        <div class="stack-title">Curriculum Modules</div>
-        
-        <div class="module-layer">
-          <div class="module-index">MODULE 01 // SYSTEM_FOUNDATIONS</div>
-          <div class="module-heading">Project Roadmap &amp; Technical Strategy</div>
-          <div class="module-body">
-            An explicit tracking guide mapped specifically for beginners. Isolate exactly what code loops, execution patterns, and orchestration tools you need to build without wasting cycles on theory overload.
-          </div>
-        </div>
-
-        <div class="module-layer">
-          <div class="module-index">MODULE 02 // AGENTIC_RESUME_DECK</div>
-          <div class="module-heading">Production-Grade Profile Structuring</div>
-          <div class="module-body">
-            How to rewrite your professional credentials to satisfy automated clearing nodes. Reframe simple data scripts into deep, metric-backed accounts of prompt arrays and retrieval performance.
-          </div>
-        </div>
-
-        <div class="module-layer">
-          <div class="module-index">MODULE 03 // ENTITY_OUTREACH</div>
-          <div class="module-heading">Direct Corporate Sourcing Pipelines</div>
-          <div class="module-body">
-            The precise framework for bypassing generic application queues. Learn to structure your engineering capabilities to appeal directly to primary engineering decision-makers.
-          </div>
-        </div>
-      </div>
-
-      <div class="right-info-stack" style="display: flex; flex-direction: column; gap: 24px;">
-        <div class="showcase-block">
-          <div class="showcase-lbl">INDUSTRIAL ARCHITECTURE DEEP-DIVE</div>
-          <div class="showcase-desc">
-            We will conduct a live, line-by-line project breakdown featuring real production execution loops for an <strong>insurance-claim-assistant</strong> cognitive asset stack.
-          </div>
-        </div>
-
-        <div class="terminal-instruction">
-          <i class="fas fa-terminal"></i>
-          <span>Verification string requirement: You must input the string <strong>AI Workshop</strong> inside the communication message box during registration parameters.</span>
-        </div>
-      </div>
-
-    </div>
-
-    <footer class="premium-footer">
-      <div class="footer-cta-panel">
-        
-        <div class="footer-text-side">
-          <span class="footer-badge">Upcoming Strategy Session</span>
-          <h2>Your AI portfolio starts here.</h2>
-          <p>Whether you're a fresher finding your path or a professional pivoting into AI — confirm your enrollment for <span>Batch-050726</span> before session launch configurations lock down.</p>
-        </div>
-
-        <div class="footer-action-side">
-          <a href="https://code2careerai.com/contact" class="footer-cta-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-calendar-check"></i> Book Your Free Strategy Call
-          </a>
-          <div class="footer-meta-bullets">
-            <div class="footer-bullet"><i class="fas fa-bolt"></i> Free 30-min strategy deep dive</div>
-            <div class="footer-bullet"><i class="fas fa-clock"></i> Callback setup parameters active</div>
-            <div class="footer-bullet"><i class="fas fa-shield-alt"></i> Zero commitment parameter threshold</div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="footer-ecosystem-bar">
-        <div class="footer-copyright">
-          © 2026 code2career_ai
-        </div>
-        
-        <div class="footer-icon-row">
-          <a href="https://code2careerai.com/youtube/" target="_blank" rel="noopener noreferrer" class="footer-icon-link" title="YouTube">
-            <i class="fab fa-youtube"></i>
-          </a>
-
-          <a href="https://www.linkedin.com/company/code2career-ai/" target="_blank" rel="noopener noreferrer" class="footer-icon-link" title="LinkedIn">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-
-          <a href="https://code2careerai.com/blog/" target="_blank" rel="noopener noreferrer" class="footer-icon-link" title="Blueprints">
-            <i class="fas fa-terminal"></i>
-          </a>
-        </div>
-      </div>
-    </footer>
-
   </div>
-</section>
+</footer>
 
+<!-- FLOATING RAZORPAY GENIE OVERLAY -->
 <div id="genie-widget" class="genie-overlay">
   <div id="genie-expanded" class="genie-card">
-    <div class="genie-head">
-      <span class="genie-chip">Live Workshop Demo</span>
+    <div class="genie-top-row">
+      <span class="genie-badge">Live Workshop • ₹299</span>
       <div>
-        <button class="genie-btn" onclick="toggleGenieMin(true)" title="Minimize">—</button>
-        <button class="genie-btn" onclick="closeGenieWidget()" title="Close">✕</button>
+        <button class="genie-close-btn" onclick="toggleGenieMin(true)" title="Minimize">—</button>
+        <button class="genie-close-btn" onclick="closeGenieWidget()" title="Close" style="margin-left: 6px;">✕</button>
       </div>
     </div>
 
-    <div class="genie-title">
-      Mastering <span class="brand-gradient">Agentic AI &amp; LangGraph</span>
-    </div>
-    <div class="genie-sub">Live practical build session &amp; architecture review.</div>
+    <div class="genie-title">Enterprise Azure PDF RAG</div>
+    <div class="genie-sub">Tuesday, 22 Sept • 8:00 PM IST • Mentor: Rajesh Kumar.</div>
 
-    <div class="genie-timer-row">
+    <div class="genie-timer-strip">
       <span class="genie-timer-lbl">Starts In:</span>
-      <span id="genie-timer-val" class="genie-timer-val">0d 00h 00m 00s</span>
+      <span id="genie-timer-val" class="genie-timer-num">0d 00h 00m 00s</span>
     </div>
 
-    <a href="https://code2careerai.com/contact" target="_blank" class="genie-cta">
-      <span>Reserve Free Seat →</span>
+    <a href="https://rzp.io/rzp/rl7Qnq2" target="_blank" rel="noopener noreferrer" class="genie-pay-btn">
+      <span>Pay ₹299 &amp; Enroll</span>
+      <span class="genie-pay-tag">Instant Access</span>
     </a>
   </div>
 
-  <div id="genie-minimized" class="genie-min-pill" style="display: none;" onclick="toggleGenieMin(false)">
-    <span>🪔</span>
-    <span class="genie-min-text">Live Workshop</span>
-    <span id="genie-min-val" class="genie-min-badge">Active</span>
+  <div id="genie-minimized" class="genie-min-bubble" style="display: none;" onclick="toggleGenieMin(false)">
+    <span>⚡</span>
+    <span class="genie-min-text">Workshop: 22 Sep (₹299)</span>
+    <span id="genie-min-val" class="genie-min-badge">Seats Open</span>
   </div>
 </div>
 
 <script>
-// Particle Background Effect
-const canvas=document.getElementById('particles');
-const tones=['#00EDFF','#FF1632','#FFD700'];
-for(let i=0;i<25;i++){
-  const spark=document.createElement('div');
-  spark.className='particle';
-  const size=Math.random()*4+3;
-  spark.style.cssText=`width:${size}px;height:${size}px;background:${tones[Math.floor(Math.random()*tones.length)]};left:${Math.random()*100}%;animation-duration:${Math.random()*12+10}s;animation-delay:${Math.random()*8}s;`;
+// Ambient Background Sparks
+const canvas = document.getElementById('particles');
+const tones = ['#00EDFF', '#FF1632', '#38BDF8'];
+for(let i = 0; i < 22; i++){
+  const spark = document.createElement('div');
+  spark.className = 'particle';
+  const size = Math.random() * 3 + 2;
+  spark.style.cssText = `
+    width: ${size}px;
+    height: ${size}px;
+    background: ${tones[Math.floor(Math.random() * tones.length)]};
+    left: ${Math.random() * 100}%;
+    animation-duration: ${Math.random() * 10 + 12}s;
+    animation-delay: ${Math.random() * 6}s;
+  `;
   canvas.appendChild(spark);
 }
 
-// Timer Logic for Main Page Header
+// Global Workshop Target: Tuesday, 22 September 2026 at 20:00 IST (8:00 PM IST)
+const WORKSHOP_TARGET_TIME = new Date("2026-09-22T20:00:00+05:30").getTime();
+const WORKSHOP_BUFFER_MS = 3 * 60 * 60 * 1000;
+
 function runTimer(){
-  const present=new Date();
-  const countdownTarget=new Date(present.getTime() + (5 * 24 * 60 * 60 * 1000));
+  const now = new Date().getTime();
+  const distance = WORKSHOP_TARGET_TIME - now;
   
-  if(!localStorage.getItem('batch_timer_target')){
-    localStorage.setItem('batch_timer_target', countdownTarget.toISOString());
-  }
-  
-  const launchWindow=new Date(localStorage.getItem('batch_timer_target'));
-  const distance=launchWindow-present;
-  
-  if(distance<=0){
-    document.getElementById('cd-d').textContent='00';
-    document.getElementById('cd-h').textContent='00';
-    document.getElementById('cd-m').textContent='00';
-    document.getElementById('cd-s').textContent='00';
+  if(distance <= 0){
+    document.getElementById('cd-d').textContent = '00';
+    document.getElementById('cd-h').textContent = '00';
+    document.getElementById('cd-m').textContent = '00';
+    document.getElementById('cd-s').textContent = '00';
     return;
   }
   
-  const days=Math.floor(distance/86400000);
-  const hours=Math.floor((distance%86400000)/3600000);
-  const minutes=Math.floor((distance%3600000)/60000);
-  const seconds=Math.floor((distance%60000)/1000);
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
   
-  const pad=value=>String(value).padStart(2,'0');
+  const pad = val => String(val).padStart(2, '0');
   
-  document.getElementById('cd-d').textContent=pad(days);
-  document.getElementById('cd-h').textContent=pad(hours);
-  document.getElementById('cd-m').textContent=pad(minutes);
-  document.getElementById('cd-s').textContent=pad(seconds);
+  document.getElementById('cd-d').textContent = pad(days);
+  document.getElementById('cd-h').textContent = pad(hours);
+  document.getElementById('cd-m').textContent = pad(minutes);
+  document.getElementById('cd-s').textContent = pad(seconds);
 }
 runTimer();
-setInterval(runTimer,1000);
+setInterval(runTimer, 1000);
 
-// Time-Gated Floating Genie Overlay Script
-// Configured for August 15, 2026 at 6:00 PM IST
-const WORKSHOP_TARGET_TIME = new Date("2026-08-15T18:00:00+05:30").getTime();
-const WORKSHOP_BUFFER_MS = 2 * 60 * 60 * 1000;
-
+// Floating Genie Overlay Management
 function updateGenieOverlay() {
   const now = new Date().getTime();
   const diff = WORKSHOP_TARGET_TIME - now;
@@ -1005,7 +1876,7 @@ function updateGenieOverlay() {
   const genieTimerVal = document.getElementById("genie-timer-val");
   const genieMinVal = document.getElementById("genie-min-val");
 
-  if (now > (WORKSHOP_TARGET_TIME + WORKSHOP_BUFFER_MS) || localStorage.getItem("c2c_genie_closed") === "true") {
+  if (now > (WORKSHOP_TARGET_TIME + WORKSHOP_BUFFER_MS) || localStorage.getItem("c2c_rag_pay_closed") === "true") {
     genieWidget.style.display = "none";
     return;
   }
@@ -1033,7 +1904,7 @@ function toggleGenieMin(isMin) {
 
 function closeGenieWidget() {
   document.getElementById("genie-widget").style.display = "none";
-  localStorage.setItem("c2c_genie_closed", "true");
+  localStorage.setItem("c2c_rag_pay_closed", "true");
 }
 
 setInterval(updateGenieOverlay, 1000);
