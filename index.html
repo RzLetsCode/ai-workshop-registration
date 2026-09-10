@@ -51,7 +51,7 @@ body::before {
   background: 
     radial-gradient(circle at 50% -80px, rgba(0, 229, 255, 0.12), transparent 680px),
     radial-gradient(circle at 85% 25%, rgba(255, 22, 50, 0.05), transparent 500px),
-    radial-gradient(circle at 10% 55%, rgba(0, 229, 255, 0.05), transparent 600px);
+    radial-gradient(circle at 10% 55%, rgba(0, 237, 255, 0.05), transparent 600px);
   pointer-events: none;
   z-index: 0;
 }
@@ -876,7 +876,7 @@ body::before {
   color: var(--text-muted);
 }
 .module-card:hover .module-tag {
-  border-color: rgba(0, 229, 255, 0.25);
+  border-color: rgba(0, 237, 255, 0.25);
   color: var(--cyan);
 }
 
@@ -982,13 +982,13 @@ body::before {
 }
 
 /* ==========================================================================
-   OFFICIAL REACT-STYLE ELEGANT FOOTER (Single Column Balanced Layout)
+   PERFECTED REACT-STYLE PROFESSIONAL FOOTER (Zero Repetition, Clean 2-Column)
    ========================================================================== */
 .c2c-official-footer {
   position: relative;
   background-color: #0E1420;
-  border-top: 1px solid rgba(0, 237, 255, 0.2);
-  padding: 48px 24px 32px;
+  border-top: 1px solid rgba(0, 237, 255, 0.22);
+  padding: 56px 24px 32px;
   overflow: hidden;
   text-align: left;
   margin-top: 60px;
@@ -1026,7 +1026,7 @@ body::before {
   right: 0;
   width: 320px;
   height: 320px;
-  background: rgba(255, 22, 50, 0.15);
+  background: rgba(37, 211, 102, 0.12);
   border-radius: 9999px;
   filter: blur(48px);
   pointer-events: none;
@@ -1039,31 +1039,30 @@ body::before {
   z-index: 10;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 36px;
 }
 .c2c-footer-layout-grid {
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 40px;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 48px;
   align-items: start;
 }
 .c2c-footer-left-col {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  max-width: 640px;
+  gap: 16px;
+  max-width: 600px;
 }
 .c2c-footer-right-col {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  min-width: 280px;
 }
 
 .c2c-footer-bio {
-  font-size: 12.5px;
+  font-size: 13.5px;
   color: rgba(188, 194, 207, 0.85);
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 .c2c-footer-socials {
@@ -1073,8 +1072,8 @@ body::before {
   padding-top: 4px;
 }
 .c2c-footer-sbtn {
-  padding: 8px;
-  border-radius: 8px;
+  padding: 9px;
+  border-radius: 10px;
   background: #131A26;
   border: 1px solid rgba(0, 237, 255, 0.2);
   color: #BCC2CF;
@@ -1082,9 +1081,9 @@ body::before {
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  font-size: 15px;
-  width: 36px;
-  height: 36px;
+  font-size: 16px;
+  width: 38px;
+  height: 38px;
   transition: all 0.2s ease;
 }
 .c2c-footer-sbtn:hover {
@@ -1092,16 +1091,20 @@ body::before {
   color: #00EDFF;
   transform: translateY(-2px);
 }
+.c2c-footer-sbtn.whatsapp:hover {
+  border-color: var(--whatsapp);
+  color: var(--whatsapp);
+}
 
 .c2c-footer-status-badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 5px 12px;
+  gap: 8px;
+  padding: 6px 14px;
   border-radius: 9999px;
   background: #131A26;
   border: 1px solid rgba(0, 237, 255, 0.3);
-  font-size: 9.5px;
+  font-size: 10px;
   font-family: 'JetBrains Mono', monospace;
   font-weight: 700;
   color: #00EDFF;
@@ -1116,28 +1119,28 @@ body::before {
 }
 
 .c2c-footer-section-title {
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   color: #00EDFF;
 }
 
 .c2c-footer-connect-box {
   background: #131A26;
   border: 1px solid rgba(0, 237, 255, 0.3);
-  padding: 14px 16px;
-  border-radius: 12px;
+  padding: 18px 20px;
+  border-radius: 14px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  gap: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
 }
 .c2c-footer-connect-link {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 12.5px;
+  gap: 12px;
+  font-size: 13.5px;
   color: #00EDFF;
   font-weight: 700;
   text-decoration: none;
@@ -1148,8 +1151,8 @@ body::before {
 }
 .c2c-footer-connect-link i {
   color: #00EDFF;
-  font-size: 13px;
-  width: 16px;
+  font-size: 15px;
+  width: 18px;
   flex-shrink: 0;
 }
 .c2c-footer-connect-link.whatsapp {
@@ -1160,24 +1163,24 @@ body::before {
 }
 
 .c2c-footer-bottom-row {
-  padding-top: 16px;
+  padding-top: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
 }
 .c2c-footer-copy {
   color: rgba(188, 194, 207, 0.6);
-  font-size: 10px;
-  letter-spacing: 0.1em;
+  font-size: 11px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 700;
 }
 .c2c-footer-tagline {
   color: rgba(188, 194, 207, 0.8);
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 600;
 }
 
@@ -1308,7 +1311,7 @@ body::before {
   .curriculum-grid { grid-template-columns: 1fr; }
   .vault-grid { grid-template-columns: 1fr 1fr; }
   .pre-footer-cta { grid-template-columns: 1fr; gap: 28px; padding: 28px; }
-  .c2c-footer-layout-grid { grid-template-columns: 1fr; gap: 24px; }
+  .c2c-footer-layout-grid { grid-template-columns: 1fr; gap: 28px; }
 }
 @media(max-width:600px) {
   .vault-grid { grid-template-columns: 1fr; }
@@ -1415,7 +1418,7 @@ body::before {
     <!-- WORKBENCH & CHECKOUT -->
     <section class="workbench-grid">
       
-      <!-- PLAYABLE VIDEO WINDOW (GITHUB PUBLIC WORKSHOP.MP4) -->
+      <!-- FIXED PLAYABLE VIDEO WINDOW (ai-workshop-registration/workshop/videos/workshop_22_09.mp4) -->
       <div class="video-workbench">
         <div class="workbench-titlebar">
           <div class="terminal-dots">
@@ -1423,7 +1426,7 @@ body::before {
             <div class="dot dot-yellow"></div>
             <div class="dot dot-green"></div>
           </div>
-          <div class="workbench-filename">workshop.mp4</div>
+          <div class="workbench-filename">workshop_22_09.mp4</div>
         </div>
         <div class="video-frame-container">
           <video 
@@ -1436,7 +1439,7 @@ body::before {
             poster="workshop/videos/poster-placeholder.jpg"
             style="width: 100%; height: 100%; object-fit: cover; display: block;"
           >
-            <source src="workshop.mp4" type="video/mp4">
+            <source src="workshop/videos/workshop_22_09.mp4" type="video/mp4">
             Your browser does not support the video tag execution layer.
           </video>
         </div>
@@ -1702,7 +1705,7 @@ body::before {
 </main>
 
 <!-- ==========================================================================
-     EXACT MATCH REACT-STYLE PROFESSIONAL FOOTER (Zero Repetition)
+     EXACT MATCH REACT-STYLE PROFESSIONAL FOOTER (Clean 2-Column Layout)
      ========================================================================== -->
 <footer class="c2c-official-footer">
   <div class="c2c-circuit-bg"></div>
@@ -1739,13 +1742,14 @@ body::before {
         </a>
 
         <p class="c2c-footer-bio">
-          Bridging the gap between learning to code and building production-grade AI systems. Acquire verified portfolio projects, step-by-step masterclasses, and real-world interview blueprints .
+          Bridging the gap between learning to code and building production-grade AI systems. Acquire verified portfolio projects, step-by-step masterclasses, and real-world interview blueprints guided by Enterprise AI Architect Rajesh Kumar.
         </p>
 
         <div class="c2c-footer-socials">
-          <a href="https://www.instagram.com/code2career_ai/" target="_blank" rel="noopener noreferrer" class="c2c-footer-sbtn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.youtube.com/@Code2Career_AI" target="_blank" rel="noopener noreferrer" class="c2c-footer-sbtn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-          <a href="https://www.linkedin.com/company/code2careerai/" target="_blank" rel="noopener noreferrer" class="c2c-footer-sbtn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://wa.me/919596858924?text=Hi%2C%20I%20have%20a%20query%20regarding%20the%20AI%20Engineer%20Masterclass" target="_blank" rel="noopener noreferrer" class="c2c-footer-sbtn whatsapp" aria-label="WhatsApp" title="WhatsApp Us"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://www.instagram.com/code2career_ai/" target="_blank" rel="noopener noreferrer" class="c2c-footer-sbtn" aria-label="Instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@Code2Career_AI" target="_blank" rel="noopener noreferrer" class="c2c-footer-sbtn" aria-label="YouTube" title="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.linkedin.com/company/code2careerai/" target="_blank" rel="noopener noreferrer" class="c2c-footer-sbtn" aria-label="LinkedIn" title="LinkedIn Company"><i class="fab fa-linkedin-in"></i></a>
         </div>
 
         <div class="c2c-footer-status-badge">
